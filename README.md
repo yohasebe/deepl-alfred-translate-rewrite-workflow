@@ -2,7 +2,8 @@
 
 An Alfred workflow to help translate and rewrite text using [DeepL API](https://www.deepl.com/pro#developer) 
 
-[![DeepL Translate/Rewrite Workflow for Alfred Demo](https://raw.github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/demo.gif)
+[![DeepL Translate/Rewrite Workflow for Alfred](https://i9.ytimg.com/vi/fA2lT3VWGWI/mq1.jpg?sqp=CKTk9PgF&rs=AOn4CLDpSAp2Y76qxwRC1plGjtWQEjGs2Q)](http://www.youtube.com/watch?v=fA2lT3VWGWI " deepl-alfred-translate-rewrite-workflow")
+**Demo**
 
 ## Downloads
 
