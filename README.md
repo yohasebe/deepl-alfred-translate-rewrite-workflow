@@ -2,6 +2,8 @@
 
 An Alfred workflow to help translate and rewrite text using [DeepL API](https://www.deepl.com/pro#developer) 
 
+[![DeepL Translate/Rewrite Workflow for Alfred Demo](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/demo.gif)
+
 ## Downloads
 
 [https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases)
@@ -79,20 +81,29 @@ This workflow automatically has DeepL detect the language of a given text only i
 
 In addition to the above variables, users can also modify values to the following DeepL API parameters. See [DeepL API](https://www.deepl.com/docs-api) for details.
 
-**Optional DeepL Variables**
+### Optional DeepL Variables
 
-* `formality`: sets "whether the translated text should lean towards formal or informal language" (**do not enable this option if you use either `ES` (Spanish), `JA` (Japanese), `ZH` (Chinese), or `EN` (English) since it does not work in these languages at the moment)
-* `split_sentences`: sets "whether the translation engine should first split the input into sentences"
-* `preserve_formatting`: sets "whether the translation engine should respect the original formatting"
+| Variable            | Explanation                                                                       |
+| ------------------- | ----------------------------------------------------------------------------------|
+|`formality`          |sets "whether the translated text should lean towards formal or informal  language"|
+|`split_sentences`    |sets "whether the translation engine should first split the input into sentences"  |
+|`preserve_formatting`|sets "whether the translation engine should respect the original formatting"       |
 
-Also, there are a couple of additional parameters you can set to make the workflow more useful for you:
+Do not enable this option if you use either `ES` (Spanish), `JA` (Japanese), `ZH` (Chinese), or `EN` (English) since it does not work in these languages at the moment)
 
-**Utility Variables**
+### Utility Variables**
 
-* `use_largetype`: uses Alfred's large type functionality (otherwise, create a temporary text file and open it using a default app)
-* `max_characters`: sets maximum number of characters accepted at a time
-* `ja_text_width`: sets width of translated text when `secondary_lang` is set to `JA` (Japanese)
-* `sound`: rings a chime when finished
+There are a couple of additional parameters you can set to make the workflow more useful for you.
+
+
+| Variable            | Explanation                                                                       |
+| ------------------- | ----------------------------------------------------------------------------------|
+|`use_largetype`      |uses Alfred's large type functionality
+|`max_characters`     |sets maximum number of characters accepted at a time
+|`ja_text_width`      |sets width of translated text when `secondary_lang` is set to `JA` (Japanese)
+|`sound`              | rings a chime when finished
+
+With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
 
 ## Disclaimer
 
