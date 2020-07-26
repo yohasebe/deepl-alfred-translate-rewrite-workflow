@@ -12,26 +12,26 @@ An Alfred workflow to help translate and rewrite text using [DeepL API](https://
 
 ### Translate text
 
-Translate text in language A to language B and vice versa
+Translate text in language A to language B and vice versa. You can use one of the following methods:
 
-* Use textbox and keyword `deepl` on Alfred's GUI
-* Use textbox and fallback search on Alfred's GUI
-* Use system clipboard and keyword `deepl-clip`on Alfred's GUI
-* Use user-defined hotkey (→text currently selected in front-most app will be submitted)
+* Using textbox and keyword `deepl` on Alfred's GUI
+* Using textbox and fallback search on Alfred's GUI
+* Using system clipboard and keyword `deepl-clip`on Alfred's GUI
+* Using user-defined hotkey (→text currently selected in front-most app will be submitted)
 
 ### Rewrite text
 
-Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again.
+Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again. You can use one of the following methods:
 
-* Use textbox and keyword `deepl` with `⌥` key pressed on Alfred's GUI
-* Use system clipboard and keyword `deepl-clip` with `⌥` key pressed on Alfred's GUI
-* Use user-defined hotkey (→ text currently selected in front-most app will be submitted)
+* Using textbox and keyword `deepl` with `⌥` key pressed on Alfred's GUI
+* Using system clipboard and keyword `deepl-clip` with `⌥` key pressed on Alfred's GUI
+* Using user-defined hotkey (→ text currently selected in front-most app will be submitted)
 
 ### Monitor Usage
 
-You can check how much text characters) you have translated so far in the current billing period, as well as the limits you set on DeepL Setting Page.
+You can check how much text characters) you have translated so far in the current billing period, as well as the limits you set on DeepL Setting Page. You can use the following method:
 
-* Use Alfred keyword `deepl-usage`
+* Using Alfred keyword `deepl-usage`
 
 ## Requirements
 
