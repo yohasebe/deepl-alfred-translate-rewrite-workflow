@@ -730,7 +730,7 @@
 	<key>createdby</key>
 	<string>Yoichiro Hasebe</string>
 	<key>description</key>
-	<string>Alfred workflow for DeepL translation and rewrite</string>
+	<string>An Alfred workflow for DeepL translation and rewrite</string>
 	<key>disabled</key>
 	<true/>
 	<key>name</key>

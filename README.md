@@ -1,6 +1,6 @@
 # DeepL Translate/Rewrite Workflow for Alfred
 
-An Alfred workflow to help translate and rewrite text using [DeepL API](https://www.deepl.com/pro#developer) 
+An [Alfred workflow](https://www.alfredapp.com/workflows/) to help translate and rewrite text using [DeepL API](https://www.deepl.com/pro#developer) 
 
 ![deepl-alfred-translate-rewrite-workflow-demo](https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif)
 
@@ -91,7 +91,7 @@ In addition to the above variables, users can also modify values to the followin
 
 Do not enable this option if you use either `ES` (Spanish), `JA` (Japanese), `ZH` (Chinese), or `EN` (English) since it does not work in these languages at the moment)
 
-### Utility Variables**
+### Utility Variables
 
 There are a couple of additional parameters you can set to make the workflow more useful for you.
 
