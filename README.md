@@ -43,7 +43,7 @@ https://www.deepl.com/pro#developer
 
 ## Setting Up
 
-Before you start using this Alfred workflow, you must set values to the following variables (use $[x]$ button in Alfred's Workflow Setting Panel):
+Before you start using this Alfred workflow, you must set values to the following variables (use `[x]` button in Alfred's Workflow Setting Panel):
 
 **Mandatory Variables**
 
