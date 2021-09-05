@@ -2,6 +2,8 @@
 
 An [Alfred workflow](https://www.alfredapp.com/workflows/) to help translate and rewrite text using [DeepL API](https://www.deepl.com/pro#developer) 
 
+> **UPDATE:** DeepL Translate/Rewrite Workflow for Alfred has been updated to work with either the DeepL free API or the Deepl pro API. Before you start using this workflow, please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the two APIs.
+
 ![deepl-alfred-translate-rewrite-workflow-demo](https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif)
 
 ## Downloads
@@ -35,11 +37,12 @@ You can check how much text characters) you have translated so far in the curren
 
 ## Requirements
 
-To use this Alfred workflow, you need a DeepL developer API account to unlock its paid API service. You can create a developer API account at the following URL.
+To use this Alfred workflow, you need a **DeepL API free** or **DeepL API Pro** account. You can create one at the following URL.
 
-https://www.deepl.com/pro#developer
 
-**Note:** DeepL API is only available for DeepL developer API accounts. It is unavailable (at the time of this writing) for regular individual DeepL accounts.
+https://www.deepl.com/pro/change-plan#developer
+
+**Note:** DeepL API is only available for DeepL developer API accounts (Free or Pro). It is unavailable (at the time of this writing) for regular individual DeepL accounts.
 
 ## Setting Up
 
