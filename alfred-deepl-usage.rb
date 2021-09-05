@@ -14,7 +14,11 @@ def parse_usage(json)
 end
 
 def monitor_usage(query)
-  target_uri = "https://api.deepl.com/v2/usage"
+  if /\:fx$/ =~ query["auth_key"]
+    target_uri = "https://api-free.deepl.com/v2/usage"
+  else
+    target_uri = "https://api.deepl.com/v2/usage"
+  end
 
   uri = URI.parse(target_uri)
   req = Net::HTTP::Post.new(uri)

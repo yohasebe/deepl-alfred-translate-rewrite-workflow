@@ -59,7 +59,11 @@ def parse(json)
 end
 
 def translate(query)
-  target_uri = "https://api.deepl.com/v2/translate"
+  if /\:fx$/ =~ query["auth_key"]
+    target_uri = "https://api-free.deepl.com/v2/translate"
+  else
+    target_uri = "https://api.deepl.com/v2/translate"
+  end
 
   uri = URI.parse(target_uri)
   req = Net::HTTP::Post.new(uri)
