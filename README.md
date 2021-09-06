@@ -110,5 +110,4 @@ With `use_largetype` disabled, the workflow creates/updates a text file in the h
 
 ## Disclaimer
 
-DeepL's API account for developers is a paid service. When The user is charged proportionally for the amount of text processed via DeepL API. The author of this workflow takes no responsibility for any damage that may result from using this software.
-
+Please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the DeepL free API and the Deepl pro API. The author of this software takes no responsibility for any damage that may result from using it. 
