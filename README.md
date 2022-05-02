@@ -19,17 +19,23 @@ Translate text in language A to language B and vice versa. You can use one of th
 * Using system clipboard and keyword `deepl-clip`on Alfred's GUI
 * Using user-defined hotkey (→text currently selected in front-most app will be submitted)
 
-##### Example (JA to EN)
+### Rewrite text
 
-**Original** (Haruki Murakami *After Dark*)
+Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again. You can use one of the following methods:
 
-> 人間ゆうのは、記憶を燃料にして生きていくものなんやないのかな。その記憶が現実的に大事なものかどうかなんて、生命の維持にとってはべつにどうでもええことみたい。ただの燃料やねん。 
+* Using textbox and keyword `deepl` with `⌥` key pressed on Alfred's GUI
+* Using system clipboard and keyword `deepl-clip` with `⌥` key pressed on Alfred's GUI
+* Using user-defined hotkey (→ text currently selected in front-most app will be submitted)
 
-**Translation**
+### Monitor Usage
 
-> I think human beings are supposed to live by using their memories as fuel. Whether or not those memories are important in reality is of no importance to life support. It's just fuel.
+You can check how much text characters) you have translated so far in the current billing period, as well as the limits you set on DeepL Setting Page. You can use the following method:
 
-##### Example (EN to JA)
+* Using Alfred keyword `deepl-usage`
+
+## Examples
+
+##### Translation from English to Japanese
 
 **Original (Bertrand Russell) **
 
@@ -39,15 +45,18 @@ Translate text in language A to language B and vice versa. You can use one of th
 
 > 集団恐怖は群れの本能を刺激し、群れの一員とみなされていない者に対して凶暴性を発揮する傾向がある。
 
-### Rewrite text
 
-Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again. You can use one of the following methods:
+### Translation from Japanese to English
 
-* Using textbox and keyword `deepl` with `⌥` key pressed on Alfred's GUI
-* Using system clipboard and keyword `deepl-clip` with `⌥` key pressed on Alfred's GUI
-* Using user-defined hotkey (→ text currently selected in front-most app will be submitted)
+**Original** (Haruki Murakami *After Dark*)
 
-##### Example (EN to JA to EN)
+> 人間ゆうのは、記憶を燃料にして生きていくものなんやないのかな。その記憶が現実的に大事なものかどうかなんて、生命の維持にとってはべつにどうでもええことみたい。ただの燃料やねん。 
+
+**Translation**
+
+> I think human beings are supposed to live by using their memories as fuel. Whether or not those memories are important in reality is of no importance to life support. It's just fuel.
+
+### Rewrite of English text (English → Japanese → English)
 
 **Original**
 
@@ -61,11 +70,7 @@ Rewrite text in one language by translating it to the other language and transla
 
 > When I was a kid, I was always playing video games in my room
 
-### Monitor Usage
 
-You can check how much text characters) you have translated so far in the current billing period, as well as the limits you set on DeepL Setting Page. You can use the following method:
-
-* Using Alfred keyword `deepl-usage`
 
 ## Requirements
 
