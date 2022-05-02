@@ -35,13 +35,13 @@ You can check how much text characters) you have translated so far in the curren
 
 ## Examples
 
-##### Translation from English to Japanese
+### Translation from English to Japanese
 
 **Original** (Bertrand Russell)
 
 > Collective fear stimulates herd instinct and tends to produce ferocity toward those who are not regarded as members of the herd.
 
-**Translation**
+**Result**
 
 > 集団恐怖は群れの本能を刺激し、群れの一員とみなされていない者に対して凶暴性を発揮する傾向がある。
 
@@ -52,7 +52,7 @@ You can check how much text characters) you have translated so far in the curren
 
 > 人間ゆうのは、記憶を燃料にして生きていくものなんやないのかな。その記憶が現実的に大事なものかどうかなんて、生命の維持にとってはべつにどうでもええことみたい。ただの燃料やねん。 
 
-**Translation**
+**Result**
 
 > I think human beings are supposed to live by using their memories as fuel. Whether or not those memories are important in reality is of no importance to life support. It's just fuel.
 
