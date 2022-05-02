@@ -1,8 +1,6 @@
 # DeepL Translate/Rewrite Workflow for Alfred
 
-An [Alfred workflow](https://www.alfredapp.com/workflows/) to help translate and rewrite text using [DeepL API](https://www.deepl.com/pro#developer) 
-
-> **UPDATE:** DeepL Translate/Rewrite Workflow for Alfred has been updated to work with either the DeepL free API or the Deepl pro API. Before you start using this workflow, please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the two APIs.
+An [Alfred workflow](https://www.alfredapp.com/workflows/) to help translate and rewrite text using [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/) or [Deepl free API](https://www.deepl.com/en/pro-api?cta=header-pro-api/). Before you start using this workflow, please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the two APIs.
 
 ![deepl-alfred-translate-rewrite-workflow-demo](https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif)
 
@@ -21,6 +19,26 @@ Translate text in language A to language B and vice versa. You can use one of th
 * Using system clipboard and keyword `deepl-clip`on Alfred's GUI
 * Using user-defined hotkey (→text currently selected in front-most app will be submitted)
 
+##### Example (JA to EN)
+
+**Original** (Haruki Murakami *After Dark*)
+
+> 人間ゆうのは、記憶を燃料にして生きていくものなんやないのかな。その記憶が現実的に大事なものかどうかなんて、生命の維持にとってはべつにどうでもええことみたい。ただの燃料やねん。 
+
+**Translation**
+
+> I think human beings are supposed to live by using their memories as fuel. Whether or not those memories are important in reality is of no importance to life support. It's just fuel.
+
+##### Example (EN to JA)
+
+**Original (Bertrand Russell) **
+
+> Collective fear stimulates herd instinct and tends to produce ferocity toward those who are not regarded as members of the herd.
+
+**Translation**
+
+> 集団恐怖は群れの本能を刺激し、群れの一員とみなされていない者に対して凶暴性を発揮する傾向がある。
+
 ### Rewrite text
 
 Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again. You can use one of the following methods:
@@ -28,6 +46,20 @@ Rewrite text in one language by translating it to the other language and transla
 * Using textbox and keyword `deepl` with `⌥` key pressed on Alfred's GUI
 * Using system clipboard and keyword `deepl-clip` with `⌥` key pressed on Alfred's GUI
 * Using user-defined hotkey (→ text currently selected in front-most app will be submitted)
+
+##### Example (EN to JA to EN)
+
+**Original**
+
+> I was always _play_ _TV game_ in my room when I was _child_.
+
+**Intermediate language**
+
+> 子供の頃は部屋でいつもテレビゲームをしていました。
+
+**Result**
+
+> When I was a kid, I was always playing video games in my room
 
 ### Monitor Usage
 
