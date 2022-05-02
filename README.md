@@ -60,7 +60,7 @@ You can check how much text characters) you have translated so far in the curren
 
 **Original**
 
-> I was always _play_ _TV game_ in my room when I was _child_.
+> I was always play TV game in my room when I was child.
 
 **Intermediate language**
 
