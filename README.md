@@ -37,7 +37,7 @@ You can check how much text characters) you have translated so far in the curren
 
 ##### Translation from English to Japanese
 
-**Original (Bertrand Russell) **
+**Original** (Bertrand Russell)
 
 > Collective fear stimulates herd instinct and tends to produce ferocity toward those who are not regarded as members of the herd.
 
