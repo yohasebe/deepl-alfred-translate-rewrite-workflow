@@ -8,7 +8,7 @@ An [Alfred workflow](https://www.alfredapp.com/workflows/) to help translate and
 
 [https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases)
 
-To start using this workflow, be sure to set the environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. See [Setup](#main-features) section below.
+To start using this workflow, be sure to set the environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. See [Setting-up](#setting-up) section below.
 
 <img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-01.png?raw=true' width="700" />
 
