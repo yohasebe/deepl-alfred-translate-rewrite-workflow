@@ -105,7 +105,7 @@ if current_status["status"] == "done"
     message = "Error: Something went wrong"
   end
 else
-  message  = "Translation is underway.\nPlease check again later.}\n"
+  message  = "Please check again later.\n"
   message += "Current status: #{current_status['status']}\n"
   # message += "Seconds remaining: #{current_status['seconds_remaining']}"
 end
