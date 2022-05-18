@@ -1,3 +1,4 @@
+require './config.rb'
 require 'net/http'
 require 'uri'
 require 'json'
@@ -17,7 +18,7 @@ mode = ARGV[3] || "translate"
 show_original_text = ARGV[4] || "false"
 show_original_text = show_original_text == "true" ? true : false
 
-max_characters = ARGV[5] || 1000 
+max_characters = ARGV[5] || 1000
 
 # Split Mode
 # "0": no split
@@ -70,7 +71,7 @@ def translate(query)
 
   req.set_form_data(query)
   req_options = {
-    use_ssl: uri.scheme == "https" 
+    use_ssl: uri.scheme == "https"
   }
 
   response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
@@ -91,12 +92,12 @@ begin
     "text" => original_text,
     "target_lang" => target,
     "split_sentences" => split_sentences,
-    "preserve_formatting" => preserve_formatting, 
+    "preserve_formatting" => preserve_formatting,
     # "formality" => formality
   }
 
   res = translate(query)
-  if res["detected_source_language"] != source 
+  if res["detected_source_language"] != source
     source = primary_lang
     target = secondary_lang
     query["source_lang"] = source
@@ -111,7 +112,7 @@ begin
   when "rewrite"
     intermediate = res["text"]
     reversed_source = target
-    reversed_target = source 
+    reversed_target = source
     query["text"] = intermediate
     query["source_lang"] = reversed_source
     query["target_lang"] = reversed_target

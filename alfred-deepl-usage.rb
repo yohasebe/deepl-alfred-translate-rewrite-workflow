@@ -1,3 +1,4 @@
+require './config.rb'
 require 'net/http'
 require 'uri'
 require 'json'

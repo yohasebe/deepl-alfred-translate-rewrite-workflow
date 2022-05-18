@@ -10,6 +10,8 @@ An [Alfred workflow](https://www.alfredapp.com/workflows/) to help translate and
 
 ## Main Features
 
+Be sure to first set environment variables `auth_key`, `primary_lang`, and `secondary_lang`. 
+
 ### Translate text
 
 Translate text in language A to language B and vice versa. You can use one of the following methods:
@@ -26,6 +28,26 @@ Rewrite text in one language by translating it to the other language and transla
 * Using textbox and keyword `deepl` with `⌥` key pressed on Alfred's GUI
 * Using system clipboard and keyword `deepl-clip` with `⌥` key pressed on Alfred's GUI
 * Using user-defined hotkey (→ text currently selected in front-most app will be submitted)
+
+### Document translation
+
+Translate documents of the type `.pptx`, `docx`, or `.pdf`. You first upload the original file and then download the resulting file once the translation has been finished. The translated file will be downloaded to the same folder as the original file is stored.
+
+Note: "max_characters" option is ignored in document translation.
+
+How to upload the original file
+
+1. Specify the file to be translated in Alfred (using selection hotkey, for instance).
+2. Select "DeepL Upload File" action.
+3. Specify if the translation is from `secondary_lang` to `primary_lang` (EN to JA, for instance) or the other way round (JA to EN, for instance).
+
+How to download the translated file
+
+1. Select "DeepL Download File" script filter by typing `deepl-download`.
+2. Specify the title of the uploaded file from the list.
+3. Download will begin if the translation has been finished. Otherwise, the current status and the estimated number of seconds remaining will be displayed .
+
+See [the official DeepL API page](https://www.deepl.com/docs-api/translating-documents/) for details on how document translation works.
 
 ### Monitor Usage
 
@@ -69,8 +91,6 @@ You can check how much text characters) you have translated so far in the curren
 **Result**
 
 > When I was a kid, I was always playing video games in my room
-
-
 
 ## Requirements
 
@@ -148,3 +168,4 @@ With `use_largetype` disabled, the workflow creates/updates a text file in the h
 ## Disclaimer
 
 Please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the DeepL free API and the Deepl pro API. The author of this software takes no responsibility for any damage that may result from using it. 
+
