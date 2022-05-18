@@ -10,7 +10,11 @@ An [Alfred workflow](https://www.alfredapp.com/workflows/) to help translate and
 
 ## Main Features
 
-Be sure to first set environment variables `auth_key`, `primary_lang`, and `secondary_lang`. 
+Be sure to set environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. 
+
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-01.png?raw=true' width="700" />
+
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-02.png?raw=true' width="700" />
 
 ### Translate text
 
@@ -31,9 +35,15 @@ Rewrite text in one language by translating it to the other language and transla
 
 ### Document translation
 
-Translate documents of the type `.pptx`, `docx`, or `.pdf`. You first upload the original file and then download the resulting file once the translation has been finished. The translated file will be downloaded to the same folder as the original file is stored.
+.pptx、docx、または.pdfのタイプのドキュメントを翻訳します。まず、元のファイルをアップロードし、翻訳が完了したら、翻訳後のファイルをダウンロードします。翻訳されたファイルは、元のファイルと同じフォルダにダウンロードされます。 注: ドキュメント翻訳では、「max_characters」オプションは無視されます。 元のファイルのアップロード方法 Alfredで翻訳するファイルを指定します（選択ホットキーを使用するなど）。 DeepL Upload File」アクションを選択します。
+翻訳が secondary_lang から primary_lang (たとえば、EN から JA) か、その逆 (たとえば、JA から EN) かを指定します。 翻訳済みファイルのダウンロード方法 deepl-download と入力して "DeepL Download File" スクリプトフィルタを選択します。 リストからアップロードするファイルのタイトルを指定します。 翻訳が終了していればダウンロードが開始されます。それ以外の場合は、現在のステータスと推定残り秒数が表示されます。 ドキュメント翻訳の動作の詳細については、DeepL API の公式ページを参照してください。
 
-Note: "max_characters" option is ignored in document translation.
+Translate .pptx, .docx, or .pdf type documents. First, upload the original file, and when the translation is complete, download the translated file. The translated file will be downloaded to the same folder as the original file. Note: The "max_characters" option is ignored for document translation. How to upload the original file Specify the file to be translated in Alfred (e.g., using the selection hotkey). Select the "DeepL Upload File" action. Specify whether the translation is from secondary_lang to primary_lang (e.g. EN to JA) or vice versa (e.g. JA to EN). How to download a translated file. Type deepl-download and select the "DeepL Download File" script filter. Specify the title of the file to upload from the list. If the translation has been completed, the download will begin. Otherwise, the current status and estimated remaining seconds will be displayed. For more information on how document translation works, see the official page on DeepL API.
+
+
+Translate documents of the type `.pptx`, `docx`, or `.pdf`. Upload the original file and then download the resulting file once the translation is complete. The translated file will be downloaded to the same folder as the original file.
+
+Note: "max_characters" option is ignored for document translation.
 
 How to upload the original file
 
@@ -44,10 +54,10 @@ How to upload the original file
 How to download the translated file
 
 1. Select "DeepL Download File" script filter by typing `deepl-download`.
-2. Specify the title of the uploaded file from the list.
-3. Download will begin if the translation has been finished. Otherwise, the current status and the estimated number of seconds remaining will be displayed .
+2. Specify the title of the file from the list.
+3. Download will begin if the translation is complete. Otherwise, the current status (queued, translating, or error) will be displayed .
 
-See [the official DeepL API page](https://www.deepl.com/docs-api/translating-documents/) for details on how document translation works.
+See also [DeepL API: Translating documents](https://www.deepl.com/docs-api/translating-documents/).
 
 ### Monitor Usage
 
