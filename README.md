@@ -1,6 +1,6 @@
 # DeepL Translate/Rewrite Workflow for Alfred
 
-An [Alfred workflow](https://www.alfredapp.com/workflows/) to help translate and rewrite text using [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/) or [Deepl free API](https://www.deepl.com/en/pro-api?cta=header-pro-api/). Before you start using this workflow, please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the two APIs.
+This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you translate and rewrite text using the [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/) or the [Deepl free API](https://www.deepl.com/en/pro-api?cta=header-pro-api/).
 
 ![deepl-alfred-translate-rewrite-workflow-demo](https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif)
 
@@ -20,28 +20,28 @@ To start using this workflow, be sure to set the environment variables `auth_key
 
 Translate text in language A to language B and vice versa. You can use one of the following methods:
 
-* Using textbox and keyword `deepl` on Alfred's GUI
-* Using textbox and fallback search on Alfred's GUI
-* Using system clipboard and keyword `deepl-clip`on Alfred's GUI
-* Using user-defined hotkey (→text currently selected in front-most app will be submitted)
+* Keyword `deepl`
+* Fallback search
+* System clipboard and keyword `deepl-clip`
+* User-defined hotkey (→ text currently selected in front-most app is sent)
 
 ### Rewrite text
 
 Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again. You can use one of the following methods:
 
-* Using textbox and keyword `deepl` with `⌥` key pressed on Alfred's GUI
-* Using system clipboard and keyword `deepl-clip` with `⌥` key pressed on Alfred's GUI
-* Using user-defined hotkey (→ text currently selected in front-most app will be submitted)
+* Keyword `deepl` with `⌥` key pressed
+* System clipboard and keyword `deepl-clip` with `⌥` key pressed
+* User-defined hotkey (→ text currently selected in front-most app will be submitted)
 
 ### Document translation
 
 Translate documents of the type `.pptx`, `docx`, or `.pdf`. Upload the original file and then download the resulting file once the translation is complete. The translated file will be downloaded to the same folder as the original file.
 
-Note: "max_characters" option is ignored for document translation.
+Note: `max_characters` option is ignored for document translation.
 
 How to upload the original file
 
-1. Specify the file to be translated in Alfred (using selection hotkey, for instance).
+1. Specify the target file (using selection hotkey, for instance).
 2. Select "DeepL Upload File" action.
 3. Specify if the translation is from `secondary_lang` to `primary_lang` (EN to JA, for instance) or the other way round (JA to EN, for instance).
 
@@ -55,18 +55,16 @@ See also [DeepL API: Translating documents](https://www.deepl.com/docs-api/trans
 
 ### Monitor Usage
 
-You can check how much text characters) you have translated so far in the current billing period, as well as the limits you set on DeepL Setting Page. You can use the following method:
-
-* Using Alfred keyword `deepl-usage`
+You can check how much text characters you have translated so far in the current billing period as well as the limits you set on DeepL Setting Page. Type in the keyword `deepl-usage`.
 
 ## Requirements
 
-To use this Alfred workflow, you need a **DeepL API free** or **DeepL API Pro** account. You can create one at the following URL.
+To use this Alfred workflow, you need a **DeepL API free** or **DeepL API Pro** account. Create one at the following URL.
 
 
 https://www.deepl.com/pro/change-plan#developer
 
-**Note:** DeepL API is only available for DeepL developer API accounts (Free or Pro). It is unavailable (at the time of this writing) for regular individual DeepL accounts.
+**Note:** The DeepL API is only available to DeepL developer API accounts (free or professional). It is not available (at the time of this writing) for regular personal DeepL accounts.
 
 ## Setting Up
 
@@ -82,31 +80,45 @@ Before you start using this Alfred workflow, you must set values to the followin
 
 **Available Languages**
 
-| Code     | Language |
-| -------- | -------- |
-|`DE`      |German    |
-|`EN`      |English   |
-|`FR`      |French    |
-|`IT`      |Italian   |
-|`JA`      |Japanese  |
-|`ES`      |Spanish   |
-|`NL`      |Dutch     |
-|`PL`      |Polish    |
-|`PT`      |Portuguese|
-|`RU`      |Russian   |
-|`ZH`      |Chinese   |
+| Code     | Language   |
+| -------- | ---------- |
+| `BG`     | Bulgarian  |
+| `CS`     | Czech      |
+| `DA`     | Danish     |
+| `DE`     | German     |
+| `EL`     | Greek      |
+| `EN`     | English    |
+| `ES`     | Spanish    |
+| `ET`     | Estonian   |
+| `FI`     | Finnish    |
+| `FR`     | French     |
+| `HU`     | Hungarian  |
+| `ID`     | Indonesian |
+| `IT`     | Italian    |
+| `JA`     | Japanese   |
+| `LT`     | Lithuanian |
+| `LV`     | Latvian    |
+| `NL`     | Dutch      |
+| `PL`     | Polish     |
+| `PT`     | Portuguese |
+| `RO`     | Romanian   |
+| `RU`     | Russian    |
+| `SK`     | Slovak     |
+| `SL`     | Slovenian  |
+| `SV`     | Swedish    |
+| `TR`     | Turkish    |
+| `ZH`     | Chinese    |
+
 
 **What are primary and secondary languages?**
 
-Basically, this workflow translates/rewrites text in both languages. As long as the text is written in either of the two languages, you don't need to specify which one you are dealing with, since DeepL can automatically detect the language of input text.
+This workflow translates/rewrites text written in either of the two languages set in the variables `primary_lang` and `secondary_lang`.
 
-Yet, if you are a speaker of the Japanese language, for instance, and you would like to use the DeepL API to translate English text to Japanese or to refine your English compositions using DeepL, you want to set `primary_lang` to `JA` and `secondary_lang` to `EN` for the following reason.
-
-This workflow automatically has DeepL detect the language of a given text only if the text is not in the language set to `secondary_lang` so that it can properly translate the text to `primary_lang` instead. Thus the process of translating from `secondary_lang` to `primary_lang` is always a bit faster than the other way around.
+If you are a native user of Japanese who often work with text in English, for instance, Set `primary_lang` to `JA` and `secondary_lang` to `EN`.
 
 ## Options
 
-In addition to the above variables, users can also modify values to the following DeepL API parameters. See [DeepL API](https://www.deepl.com/docs-api) for details.
+In addition to the above variables, you can also modify values to the following DeepL API parameters. See [DeepL API](https://www.deepl.com/docs-api) for details.
 
 ### Optional DeepL Variables
 
@@ -116,12 +128,11 @@ In addition to the above variables, users can also modify values to the followin
 |`split_sentences`    |sets "whether the translation engine should first split the input into sentences"  |
 |`preserve_formatting`|sets "whether the translation engine should respect the original formatting"       |
 
-Do not enable this option if you use either `ES` (Spanish), `JA` (Japanese), `ZH` (Chinese), or `EN` (English) since it does not work in these languages at the moment)
+Currently the `formality` option only works when the target language is one of the following: `DE`, `FR`, `IT`, `ES`, `NL`, `PL`, `PT-PT`, `PT-BR` and `RU`.
 
 ### Utility Variables
 
 There are a couple of additional parameters you can set to make the workflow more useful for you.
-
 
 | Variable            | Explanation                                                                       |
 | ------------------- | ----------------------------------------------------------------------------------|
@@ -134,5 +145,7 @@ With `use_largetype` disabled, the workflow creates/updates a text file in the h
 
 ## Disclaimer
 
-Please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the DeepL free API and the Deepl pro API. The author of this software takes no responsibility for any damage that may result from using it. 
+Please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the DeepL free API and the Deepl pro API.
+
+The author of this software takes no responsibility for any damage that may result from using it. 
 
