@@ -6,6 +6,8 @@ This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you t
 
 ## Downloads
 
+**Current version**: `1.2.2`
+
 [https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases)
 
 To start using this workflow, be sure to set the environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. See [Setting-up](#setting-up) section below.
@@ -134,12 +136,13 @@ Currently the `formality` option only works when the target language is one of t
 
 There are a couple of additional parameters you can set to make the workflow more useful for you.
 
-| Variable            | Explanation                                                                       |
-| ------------------- | ----------------------------------------------------------------------------------|
-|`use_largetype`      |uses Alfred's large type functionality
-|`max_characters`     |sets maximum number of characters accepted at a time
-|`ja_text_width`      |sets width of translated text when `secondary_lang` is set to `JA` (Japanese)
-|`sound`              | rings a chime when finished
+| Variable               | Explanation                                                                       |
+| ---------------------- | ----------------------------------------------------------------------------------|
+|`wait_before_selection` |number of seconds before copy text in the selected area (default: 0.5)
+|`use_largetype`         |uses Alfred's large type functionality
+|`max_characters`        |sets maximum number of characters accepted at a time
+|`ja_text_width`         |sets width of translated text when `secondary_lang` is set to `JA` (Japanese)
+|`sound`                 |rings a chime when finished
 
 With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
 
@@ -147,5 +150,4 @@ With `use_largetype` disabled, the workflow creates/updates a text file in the h
 
 Please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the DeepL free API and the Deepl pro API.
 
-The author of this software takes no responsibility for any damage that may result from using it. 
-
+The author of this software takes no responsibility for any damage that may result from using it.
