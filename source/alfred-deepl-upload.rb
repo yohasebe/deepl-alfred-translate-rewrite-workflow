@@ -73,7 +73,7 @@ res["dirname"]   = dirname
 
 uploaded_files = {}
 data = nil
-if File.exists?($DEEPL_DOC_TEMP_FILE)
+if File.exist?($DEEPL_DOC_TEMP_FILE)
   File.open($DEEPL_DOC_TEMP_FILE, "r") do |f|
     data = f.read
     uploaded_files = JSON.parse(data)
@@ -101,4 +101,3 @@ message += "Document ID:\n#{res['document_id']} \n"
 message += "Document KEY:\n#{res['document_key']}\n"
 
 print message
-
