@@ -66,7 +66,7 @@ end
 
 uploaded_files = {}
 data = nil
-if File.exists?($DEEPL_DOC_TEMP_FILE)
+if File.exist?($DEEPL_DOC_TEMP_FILE)
   File.open($DEEPL_DOC_TEMP_FILE, "r") do |f|
     data = f.read
     uploaded_files = JSON.parse(data)

@@ -5,7 +5,7 @@ require 'json'
 
 auth_key = ARGV[0]
 
-if !File.exists?($DEEPL_DOC_TEMP_FILE)
+if !File.exist?($DEEPL_DOC_TEMP_FILE)
   uploaded_files = []
   items = ["title": "No files uploaded"]
 else
