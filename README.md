@@ -6,9 +6,15 @@ This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you t
 
 ## Downloads
 
-**Current version**: `1.2.2`
+**Current version**: `1.2.3`
 
 [https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases)
+
+**Change Log**
+
+- Selected text can be translated/rewritten as a [universal action](https://www.alfredapp.com/universal-actions/)
+
+## Setup
 
 To start using this workflow, be sure to set the environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. See [Setting-up](#setting-up) section below.
 
@@ -16,14 +22,21 @@ To start using this workflow, be sure to set the environment variables `auth_key
 
 <img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-02.png?raw=true' width="700" />
 
+To translate or rewite text as a universal action, set up `selection hotkey` and enable `workflow file actions` and `workflow universal actions`.
+
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-03.png?raw=true' width="700" />
+
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-04.png?raw=true' width="700" />
+
 ## Main Features
 
 ### Translate text
 
 Translate text in language A to language B and vice versa. You can use one of the following methods:
 
-* Keyword `deepl`
+* Universal action
 * Fallback search
+* Keyword `deepl`
 * System clipboard and keyword `deepl-clip`
 * User-defined hotkey (→ text currently selected in front-most app is sent)
 
@@ -31,6 +44,7 @@ Translate text in language A to language B and vice versa. You can use one of th
 
 Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again. You can use one of the following methods:
 
+* Universal action
 * Keyword `deepl` with `⌥` key pressed
 * System clipboard and keyword `deepl-clip` with `⌥` key pressed
 * User-defined hotkey (→ text currently selected in front-most app will be submitted)
@@ -41,13 +55,15 @@ Translate documents of the type `.pptx`, `docx`, or `.pdf`. Upload the original 
 
 Note: `max_characters` option is ignored for document translation.
 
-How to upload the original file
+**To upload the original file**
 
 1. Specify the target file (using selection hotkey, for instance).
 2. Select "DeepL Upload File" action.
 3. Specify if the translation is from `secondary_lang` to `primary_lang` (EN to JA, for instance) or the other way round (JA to EN, for instance).
 
-How to download the translated file
+Or alternatively, you can use a workflow file action `DeepL Upload File`. 
+
+**To download the translated file**
 
 1. Select "DeepL Download File" script filter by typing `deepl-download`.
 2. Specify the title of the file from the list.
