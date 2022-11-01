@@ -6,7 +6,7 @@ This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you t
 
 ## Downloads
 
-**Current version**: `1.2.3`
+**Current version**: `1.3.0`
 
 [https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases)
 
