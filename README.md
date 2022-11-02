@@ -45,8 +45,8 @@ Translate text in language A to language B and vice versa. You can use one of th
 Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again. You can use one of the following methods:
 
 * Universal action
-* Keyword `deepl` with `⌥` key pressed
-* System clipboard and keyword `deepl-clip` with `⌥` key pressed
+* Keyword `deepl` with `⌘` key pressed
+* System clipboard and keyword `deepl-clip` with `⌘` key pressed
 * User-defined hotkey (→ text currently selected in front-most app will be submitted)
 
 ### Document translation
