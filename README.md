@@ -6,7 +6,7 @@ This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you t
 
 ## Downloads
 
-**Current version**: `1.3.0`
+**Current version**: `1.3.1`
 
 [https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases)
 
@@ -142,7 +142,7 @@ In addition to the above variables, you can also modify values to the following 
 
 | Variable            | Explanation                                                                       |
 | ------------------- | ----------------------------------------------------------------------------------|
-|`formality`          |sets "whether the translated text should lean towards formal or informal  language"|
+|`formality`          |sets "whether the translated text should lean towards formal or informal language" |
 |`split_sentences`    |sets "whether the translation engine should first split the input into sentences"  |
 |`preserve_formatting`|sets "whether the translation engine should respect the original formatting"       |
 
