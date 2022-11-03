@@ -6,27 +6,28 @@ This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you t
 
 ## Downloads
 
-**Current version**: `1.3.1`
+**Current version**: `1.3.2`
 
-[https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/releases)
+[Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
-- Selected text can be translated/rewritten as a [universal action](https://www.alfredapp.com/universal-actions/)
+- 1.3.2: Switched to Alfreds's native function of obtaining selected text for performance and stability
+- 1.3.1: Selected text can be translated/rewritten as a [universal action](https://www.alfredapp.com/universal-actions/)
 
 ## Setup
 
 To start using this workflow, be sure to set the environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. See [Setting-up](#setting-up) section below.
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-01.png?raw=true' width="700" />
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-01.png?raw=true' width="700" />
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-02.png?raw=true' width="700" />
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-02.png?raw=true' width="700" />
 
 To translate or rewite text as a universal action, set up `selection hotkey` and enable `workflow file actions` and `workflow universal actions`.
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-03.png?raw=true' width="700" />
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-03.png?raw=true' width="700" />
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/master/images/setup-04.png?raw=true' width="700" />
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-04.png?raw=true' width="700" />
 
 ## Main Features
 
