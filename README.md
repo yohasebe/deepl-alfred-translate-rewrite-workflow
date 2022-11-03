@@ -163,6 +163,14 @@ There are a couple of additional parameters you can set to make the workflow mor
 
 With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
 
+## Author
+
+Yoichiro Hasebe (<yohasebe@gmail.com>)
+
+## License
+
+The MIT License
+
 ## Disclaimer
 
 Please make sure you understand [the difference](https://support.deepl.com/hc/en-us/articles/360021183620-DeepL-API-Free-vs-DeepL-API-Pro) between the DeepL free API and the Deepl pro API.
