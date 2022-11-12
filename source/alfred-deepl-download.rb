@@ -74,6 +74,8 @@ if File.exist?($DEEPL_DOC_TEMP_FILE)
 end
 
 filename = uploaded_files[document_id]["filename"]
+basename = File.basename(filename, ".*")
+extname = File.extname(filename)
 dirname  = uploaded_files[document_id]["dirname"]
 unless File.directory?(dirname)
   FileUtils.mkdir_p(dirname)
@@ -85,7 +87,7 @@ message = ""
 if current_status["status"] == "done"
   begin
     blob = download(auth_key, document_id, document_key)
-    filepath = File.join(dirname, "#{document_id}-#{filename}")
+    filepath = File.join(dirname, "#{basename}-#{document_id}#{extname}")
     File.open(filepath, "wb") do |f|
       f.write blob
     end

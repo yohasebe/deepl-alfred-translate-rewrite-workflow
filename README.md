@@ -1,17 +1,20 @@
 # DeepL Translate/Rewrite Workflow for Alfred
 
+![screenshot.png](./images/screenshot.png)
+
 This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you translate and rewrite text using the [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/) or the [Deepl free API](https://www.deepl.com/en/pro-api?cta=header-pro-api/).
 
 ![deepl-alfred-translate-rewrite-workflow-demo](https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif)
 
 ## Downloads
 
-**Current version**: `1.3.2`
+**Current version**: `1.3.3`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
+- 1.3.3: `open_file` environment valuable added 
 - 1.3.2: Switched to Alfred's native feature to retrieve selected text for performance and stability
 - 1.3.1: Feature to translate/rewrite using Alfred's [universal action](https://www.alfredapp.com/universal-actions/)
 
@@ -155,11 +158,12 @@ There are a couple of additional parameters you can set to make the workflow mor
 
 | Variable               | Explanation                                                                       |
 | ---------------------- | ----------------------------------------------------------------------------------|
-|`wait_before_selection` |number of seconds before copy text in the selected area (default: 0.5)
-|`use_largetype`         |uses Alfred's large type functionality
-|`max_characters`        |sets maximum number of characters accepted at a time
-|`ja_text_width`         |sets width of translated text when `secondary_lang` is set to `JA` (Japanese)
-|`sound`                 |rings a chime when finished
+|`wait_before_selection` |number of seconds before copy text in the selected area (default: 0.5)             |
+|`use_largetype`         |uses Alfred's large type functionality                                             |
+|`max_characters`        |sets maximum number of characters accepted at a time                               |
+|`ja_text_width`         |sets width of translated text when `secondary_lang` is set to `JA` (Japanese)      |
+|`sound`                 |rings a chime when finished                                                        |
+|`open_file`             |open the translation file once download is complete                          |
 
 With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
 
