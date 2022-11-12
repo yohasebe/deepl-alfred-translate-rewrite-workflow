@@ -1,6 +1,6 @@
 # DeepL Translate/Rewrite Workflow for Alfred
 
-![screenshot.png](./images/screenshot.png)
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/screenshot.png?raw=true' width="500" />
 
 This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you translate and rewrite text using the [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/) or the [Deepl free API](https://www.deepl.com/en/pro-api?cta=header-pro-api/).
 
@@ -22,9 +22,9 @@ This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you t
 
 To start using this workflow, be sure to set the environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. See [Setting-up](#setting-up) section below.
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-01.png?raw=true' width="700" />
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-01.png?raw=true' width="500" />
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-02.png?raw=true' width="700" />
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-02.png?raw=true' width="500" />
 
 To translate or rewite text as a universal action, set up `selection hotkey` and enable `workflow file actions` and `workflow universal actions`.
 
@@ -75,6 +75,8 @@ Or alternatively, you can use a workflow file action `DeepL Upload File`.
 
 See also [DeepL API: Translating documents](https://www.deepl.com/docs-api/translating-documents/).
 
+https://user-images.githubusercontent.com/18207/201455994-ea5cd80b-3438-48a0-8e11-c25150ff5288.mp4
+
 ### Monitor Usage
 
 You can check how much text characters you have translated so far in the current billing period as well as the limits you set on DeepL Setting Page. Type in the keyword `deepl-usage`.
@@ -82,7 +84,6 @@ You can check how much text characters you have translated so far in the current
 ## Requirements
 
 To use this Alfred workflow, you need a **DeepL API free** or **DeepL API Pro** account. Create one at the following URL.
-
 
 https://www.deepl.com/pro/change-plan#developer
 
