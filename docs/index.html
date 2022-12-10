@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>DeepL Translate / Rewrite</title>
+    <link rel="stylesheet" href="https://yohasebe.github.io/deepl-alfred-ranslate-rewrite-workflow/github.css" />
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
+    <link rel='icon' href='https://yohasebe.github.io/deepl-alfred-ranslate-rewrite-workflow/icon.png' />
+  </head>
+  <body>
+    <header id="title-block-header">
+      <h1 class="title">DeepL Translate / Rewrite</h1>
+    </header>
+    <h2>
+      <span style="display: inline-block; height: 2em;"><img src='https://yohasebe.github.io/deepl-alfred-ranslate-rewrite-workflow/icon.png' style='height:100%;'/></span> <span>DeepL Translate / Rewrite Alfred Workflow</span>
+    </h2>
+    <blockquote>This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the workflow is properly installed.</blockquote>
+    <div style='margin-top:20px;'>
+      <textarea id="text" name="text" rows="5" placeholder="Enter your text here" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+    </div>
+
+    <div style='margin-top:20px;'>
+      <label>Mode: </label>
+      <label><input type="radio" name="mode" value="translate" onchange="setStorage('mode', this.value);" checked="checked" />Translate</label>
+      <label><input type="radio" name="mode" value="rewrite" onchange="setStorage('mode', this.value);" />Rewrite</label>
+    </div>
+
+    <div style='margin-top:20px;'>
+      <label for="source_lang" id="label_source_lang">Source Language: </label>
+      <select id="source_lang" name="source_lang" onchange="setStorage('source_lang', this.value);">
+        <option value="BG">Bulgarian</option>
+        <option value="CS">Czech</option>
+        <option value="DA">Danish</option>
+        <option value="DE">German</option>
+        <option value="EL">Greek</option>
+        <option value="EN">English</option>
+        <option value="ES">Spanish</option>
+        <option value="ET">Estonian</option>
+        <option value="FI">Finnish</option>
+        <option value="FR">French</option>
+        <option value="HU">Hungarian</option>
+        <option value="ID">Indonesian</option>
+        <option value="IT">Italian</option>
+        <option value="JA">Japanese</option>
+        <option value="LT">Lithuanian</option>
+        <option value="LV">Latvian</option>
+        <option value="NL">Dutch</option>
+        <option value="PL">Polish</option>
+        <option value="PT">Portuguese</option>
+        <option value="RO">Romanian</option>
+        <option value="RU">Russian</option>
+        <option value="SK">Slovak</option>
+        <option value="SL">Slovenian</option>
+        <option value="SV">Swedish</option>
+        <option value="TR">Turkish</option>
+        <option value="UK">Ukrainian</option>
+        <option value="ZH">Chinese</option>
+      </select>
+    </div>
+
+    <div style='margin-top:20px;'>
+      <label for="target_lang" id="label_target_lang">Target Language: </label>
+      <select id="target_lang" name="target_lang" onchange="setStorage('target_lang', this.value);" >
+        <option value="BG">Bulgarian</option>
+        <option value="CS">Czech</option>
+        <option value="DA">Danish</option>
+        <option value="DE">German</option>
+        <option value="EL">Greek</option>
+        <option value="EN">English</option>
+        <option value="ES">Spanish</option>
+        <option value="ET">Estonian</option>
+        <option value="FI">Finnish</option>
+        <option value="FR">French</option>
+        <option value="HU">Hungarian</option>
+        <option value="ID">Indonesian</option>
+        <option value="IT">Italian</option>
+        <option value="JA">Japanese</option>
+        <option value="LT">Lithuanian</option>
+        <option value="LV">Latvian</option>
+        <option value="NL">Dutch</option>
+        <option value="PL">Polish</option>
+        <option value="PT">Portuguese</option>
+        <option value="RO">Romanian</option>
+        <option value="RU">Russian</option>
+        <option value="SK">Slovak</option>
+        <option value="SL">Slovenian</option>
+        <option value="SV">Swedish</option>
+        <option value="TR">Turkish</option>
+        <option value="UK">Ukrainian</option>
+        <option value="ZH">Chinese</option>
+      </select>
+    </div>
+
+    <div style='margin-top:20px;'>
+      <input type = "button" value="Send Text to Alfred" onclick = "execute();" />
+    </div>
+
+    <script>
+
+      function switchLabels(value){
+        if(value == "translate"){
+          document.getElementById("label_source_lang").innerText = "Source Language";
+          document.getElementById("label_target_lang").innerText = "Target Language";
+        } else if (value == "rewrite"){
+          document.getElementById("label_source_lang").innerText = "Source/Target Language";
+          document.getElementById("label_target_lang").innerText = "Intermediate Language";
+        }
+      }
+
+      function setStorage(key, value) {
+        localStorage.setItem(key, value);
+        if(key === "mode"){
+          switchLabels(value);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function(){
+        document.getElementById("source_lang").value = localStorage.getItem("source_lang") || "EN";
+        document.getElementById("target_lang").value = localStorage.getItem("target_lang") || "EN";
+        const radios = document.getElementsByName("mode");
+        const value = localStorage.getItem('mode');
+        switchLabels(value)
+        for(let i = 0; i < radios.length; i++){
+          if(radios[i].value == value){
+            radios[i].checked = true;
+          }
+        }
+      });
+
+      function execute() {
+        const source_lang = document.getElementById("source_lang").value;
+        const target_lang = document.getElementById("target_lang").value;
+        const mode = document.querySelector('[name="mode"]:checked').value
+        const text = document.getElementById("text").value;
+
+        if(text === ""){
+          alert("Textarea is empty");
+        } else {
+          const url = "alfred://runtrigger/com.yohasebe.deepl-alfred-translate-rewrite-workflow/deepl-translate-rewrite/?argument=" + mode + "%20" + source_lang + "%20" + target_lang + "%20" + text;
+          window.location = url;
+        }
+      }
+      document.getElementById("text").focus();
+    </script>
+  </body>
+</html>
+
