@@ -62,6 +62,11 @@
     </div>
 
     <div style='margin-top:20px;'>
+      <input type = "button" style="color: #444" value="Switch Languages ↑↓" onclick = "switchLanguages();" />
+    </div>
+
+
+    <div style='margin-top:20px;'>
       <label for="target_lang" id="label_target_lang">Target Language: </label>
       <select id="target_lang" name="target_lang" onchange="setStorage('target_lang', this.value);" >
         <option value="BG">Bulgarian</option>
@@ -130,6 +135,15 @@
         }
       });
 
+      function switchLanguages() {
+        const sl = document.getElementById("source_lang").value;
+        const tl = document.getElementById("target_lang").value
+        document.getElementById("source_lang").value = tl;
+        document.getElementById("target_lang").value = sl;
+        setStorage("source_lang", tl);
+        setStorage("target_lang", sl);
+      }
+        
       function execute() {
         const source_lang = document.getElementById("source_lang").value;
         const target_lang = document.getElementById("target_lang").value;
