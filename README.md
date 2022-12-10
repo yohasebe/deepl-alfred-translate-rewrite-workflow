@@ -14,7 +14,7 @@ This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you t
 
 **Change Log**
 
-- 1.5.0: "Open Textbox" feature added
+- 1.5.0: "DeepL Textbox" feature added
 - 1.4.0: check-for-update command added
 - 1.3.3: `open_file` environment valuable added 
 - 1.3.2: Switched to Alfred's native feature to retrieve selected text for performance and stability
@@ -165,7 +165,6 @@ There are a couple of additional parameters you can set to make the workflow mor
 
 | Variable               | Explanation                                                                       |
 | ---------------------- | ----------------------------------------------------------------------------------|
-|`wait_before_selection` |number of seconds before copy text in the selected area (default: 0.5)             |
 |`use_largetype`         |uses Alfred's large type functionality                                             |
 |`max_characters`        |sets maximum number of characters accepted at a time                               |
 |`ja_text_width`         |sets width of translated text when `secondary_lang` is set to `JA` (Japanese)      |
