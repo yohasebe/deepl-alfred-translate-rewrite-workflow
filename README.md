@@ -8,13 +8,14 @@ This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you t
 
 ## Downloads
 
-**Current version**: `1.4.0`
+**Current version**: `1.5.0`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
-- 1.4.0: check-for-update command has been added
+- 1.5.0: "Open Textbox" feature added
+- 1.4.0: check-for-update command added
 - 1.3.3: `open_file` environment valuable added 
 - 1.3.2: Switched to Alfred's native feature to retrieve selected text for performance and stability
 - 1.3.1: Feature to translate/rewrite using Alfred's [universal action](https://www.alfredapp.com/universal-actions/)
