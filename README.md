@@ -2,7 +2,16 @@
 
 <img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/screenshot.png?raw=true' width="500" />
 
-This is an [Alfred workflow](https://www.alfredapp.com/workflows/) to help you translate and rewrite text using the [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/) or the [Deepl free API](https://www.deepl.com/en/pro-api?cta=header-pro-api/).
+
+## Overview
+
+An [Alfred workflow](https://www.alfredapp.com/workflows/) to help you translate and rewrite text using the [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/) or the [Deepl free API](https://www.deepl.com/en/pro-api?cta=header-pro-api/).
+
+The selected text can be used in any Mac application via hot keys. The source and target languages are automatically detected from one of the two languages specified in the settings `primary_lang` and `secondary_lang`. This means that if you want to translate or rewrite a text, regardless of whether it is in the primary or secondary language, all you have to do is select the text and press a hotkey.
+
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/translate.png?raw=true' height="120"/>
+
+<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/rewrite.png?raw=true' height="120"/>
 
 ![deepl-alfred-translate-rewrite-workflow-demo](https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif)
 
@@ -82,6 +91,10 @@ Or alternatively, you can use a workflow file action `DeepL Upload File`.
 See also [DeepL API: Translating documents](https://www.deepl.com/docs-api/translating-documents/).
 
 https://user-images.githubusercontent.com/18207/201455994-ea5cd80b-3438-48a0-8e11-c25150ff5288.mp4
+
+### Special Input Form in Default Browser
+
+You can open a special input form in your default browser. To open this form, use the keyword `deepl-textbox` or a hotkey. When using this special input form, the `primary_lang` and `secondary lang` settings are ignored. You can specify the languages using selectors and change modes (translate or rewrite) using radio buttons. These settings are stored in the browser and can be used later.
 
 ### Monitor Usage
 
