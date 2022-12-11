@@ -141,7 +141,7 @@
         document.getElementById("source_lang").value = localStorage.getItem("source_lang") || "EN";
         document.getElementById("target_lang").value = localStorage.getItem("target_lang") || "EN";
         const radios = document.getElementsByName("mode");
-        const value = localStorage.getItem('mode');
+        const value = localStorage.getItem('mode') || "rewrite";
         switchLabels(value)
         for(let i = 0; i < radios.length; i++){
           if(radios[i].value == value){
