@@ -64,12 +64,12 @@
       </select>
     </div>
 
-    <div style='margin-top:20px;'>
-      <input type = "button" style="color: #444" value="Switch Languages ↑↓" onclick = "switchLanguages();" />
+    <div style='margin-top:10px;'>
+      <input type = "button" style="color: #666" value="Switch ↑↓" onclick = "switchLanguages();" />
     </div>
 
 
-    <div style='margin-top:20px;'>
+    <div style='margin-top:10px;'>
       <label for="target_lang" id="label_target_lang">Target Language: </label>
       <select id="target_lang" name="target_lang" onchange="setStorage('target_lang', this.value);" >
         <option value="BG">Bulgarian</option>
@@ -102,8 +102,14 @@
       </select>
     </div>
 
+
     <div style='margin-top:20px;'>
-      <input type = "button" value="Send Text to Alfred" onclick = "execute();" />
+      <img id='img-translate' src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/translate.png?raw=true' style='display:none; height: 140px;'/>
+      <img id='img-rewrite' src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/rewrite.png?raw=true' style='display:none; height: 140px;'/>
+    </div>
+
+    <div style='margin-top:20px;'>
+      <input type = "button" style='font-weight: bold;' value="Send Text to Alfred" onclick = "execute();" />
     </div>
 
     <script>
@@ -112,9 +118,15 @@
         if(value == "translate"){
           document.getElementById("label_source_lang").innerText = "Source Language";
           document.getElementById("label_target_lang").innerText = "Target Language";
+          document.getElementById("img-rewrite").style.display = "none";
+          const img = document.getElementById("img-translate")
+          img.style.display = "block";
         } else if (value == "rewrite"){
           document.getElementById("label_source_lang").innerText = "Source/Target Language";
           document.getElementById("label_target_lang").innerText = "Intermediate Language";
+          document.getElementById("img-translate").style.display = "none";
+          const img = document.getElementById("img-rewrite")
+          img.style.display = "block";
         }
       }
 
