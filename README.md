@@ -15,6 +15,11 @@ The selected text can be used in any Mac application via hot keys. The source an
 
 ![deepl-alfred-translate-rewrite-workflow-demo](https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif)
 
+There are other features including:
+
+- Translate/Rewrite using a special HTML input form
+- Document translation (file uploading and downloading)
+
 ## Downloads
 
 **Current version**: `1.5.0`
@@ -51,7 +56,7 @@ Type `check-for-update` and run the workflow. If there is a newer version, click
 
 ### Translate text
 
-Translate text in language A to language B and vice versa. You can use one of the following methods:
+Translate text in `secondary_lang` to `primary_lang` and vice versa. You can use one of the following methods:
 
 * Universal action
 * Fallback search
