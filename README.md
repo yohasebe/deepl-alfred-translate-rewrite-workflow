@@ -22,12 +22,14 @@ There are other features including:
 
 ## Downloads
 
-**Current version**: `1.5.0`
+**Current version**: `1.5.2`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
+- 1.5.2: `speak` environment variable enabled (default: `false`)
+- 1.5.1: Improvement of internal process
 - 1.5.0: "deepl-textbox" command added
 - 1.4.0: "check-for-update" command added
 - 1.3.3: `open_file` environment valuable added 
@@ -187,9 +189,16 @@ There are a couple of additional parameters you can set to make the workflow mor
 |`max_characters`        |sets maximum number of characters accepted at a time                               |
 |`ja_text_width`         |sets width of translated text when `secondary_lang` is set to `JA` (Japanese)      |
 |`sound`                 |rings a chime when finished                                                        |
-|`open_file`             |open the translation file once download is complete                          |
+|`speak`                 |read aloud the response in the "system speech language" on your Mac                |
+|`open_file`             |open the translation file once download is complete                                |
 
 With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
+
+#### Text to Speech
+
+If the `speak` variable is set `true`, the result text will be read aloud in the system's standard language and voice. To change the language and speech, go to `[Accessibility]` - `[Vision]` -`[Spoken Content]` in the Mac Settings panel.
+
+<img width="600" alt="spoken-content-panel" src="https://user-images.githubusercontent.com/18207/221521819-a942e6ba-0523-4526-93da-52b6167defaf.png">
 
 ## Author
 
