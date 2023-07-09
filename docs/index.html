@@ -17,7 +17,7 @@
     <h2>
       <span style="display: inline-block; height: 2em;"><img src='https://yohasebe.github.io/deepl-alfred-translate-rewrite-workflow/icon.png' style='height:100%;'/></span> <span>DeepL Translate / Rewrite Alfred Workflow</span>
     </h2>
-    <blockquote>This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the workflow is properly installed. Input data are directly sent to Alfred workflow locally installed on your Mac. The data is not sent to any website other than DeepL. </blockquote>
+    <p>This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the workflow is properly installed. </p><p>Input data are directly sent to Alfred workflow locally installed on your Mac. The data is not sent to any website other than DeepL. </p>
 
     <div style='margin-top:20px;'>
       <textarea id="text" name="text" rows="5" placeholder="Enter your text here" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
@@ -100,6 +100,14 @@
       </select>
     </div>
 
+    <div style='margin-top:10px;'>
+      <label for="formality" id="label_formality">Formality (if available): </label>
+      <select id="formality" name="formality" >
+        <option value="deafult">Default</option>
+        <option value="more">More formal</option>
+        <option value="less">Less formal</option>
+      </select>
+    </div>
 
     <div style='margin-top:20px;'>
       <img id='img-translate' src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/translate.png?raw=true' style='display:none; height: 140px;'/>
@@ -160,13 +168,14 @@
       function execute() {
         const source_lang = document.getElementById("source_lang").value;
         const target_lang = document.getElementById("target_lang").value;
+        const formality = document.getElementById("formality").value;
         const mode = document.querySelector('[name="mode"]:checked').value
         const text = document.getElementById("text").value;
 
         if(text === ""){
           alert("Textarea is empty");
         } else {
-          const url = "alfred://runtrigger/com.yohasebe.deepl-alfred-translate-rewrite-workflow/deepl-translate-rewrite/?argument=" + mode + "%20" + source_lang + "%20" + target_lang + "%20" + text;
+          const url = "alfred://runtrigger/com.yohasebe.deepl-alfred-translate-rewrite-workflow/deepl-translate-rewrite/?argument=" + mode + "%20" + source_lang + "%20" + target_lang + "%20" + formality + "%20" + text;
           window.location = url;
         }
       }
