@@ -22,12 +22,13 @@ There are other features including:
 
 ## Downloads
 
-**Current version**: `1.5.2`
+**Current version**: `1.6.0`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
+- 1.6.0: `formality` environment variable supported (default: `default`)
 - 1.5.2: `speak` environment variable enabled (default: `false`)
 - 1.5.1: Improvement of internal process
 - 1.5.0: "deepl-textbox" command added
