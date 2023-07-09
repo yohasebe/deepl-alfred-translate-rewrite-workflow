@@ -17,7 +17,10 @@
     <h2>
       <span style="display: inline-block; height: 2em;"><img src='https://yohasebe.github.io/deepl-alfred-translate-rewrite-workflow/icon.png' style='height:100%;'/></span> <span>DeepL Translate / Rewrite Alfred Workflow</span>
     </h2>
-    <p>This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the workflow is properly installed. </p><p>Input data are directly sent to Alfred workflow locally installed on your Mac. The data is not sent to any website other than DeepL. </p>
+    <p>This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;font-weight: bold;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow' style='text-decoration: none; font-weight: bold;' > latest version of the workflow (0.1.6)</a> is properly installed. </p>
+
+
+    <p>Input data are directly sent to Alfred workflow locally installed on your Mac. The data is not sent to any website other than DeepL. </p>
 
     <div style='margin-top:20px;'>
       <textarea id="text" name="text" rows="5" placeholder="Enter your text here" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
@@ -63,7 +66,7 @@
     </div>
 
     <div style='margin-top:10px;'>
-      <input type = "button" style="color: #666" value="Switch ↑↓" onclick = "switchLanguages();" />
+      <input type = "button" style="padding: 5px;" value="Switch ↑↓" onclick = "switchLanguages();" />
     </div>
 
 
@@ -115,7 +118,8 @@
     </div>
 
     <div style='margin-top:20px;'>
-      <input type = "button" style='font-weight: bold;' value="Send Text to Alfred" onclick = "execute();" />
+      <input type = "button" style='padding: 5px; margin-right: 10px;' value="Clear Textarea" onclick = "clearTextarea();" />
+      <input type = "button" style='padding: 5px; font-weight: bold;' value="Send Text → Alfred" onclick = "execute();" />
     </div>
 
     <script>
@@ -179,8 +183,12 @@
           window.location = url;
         }
       }
+
+      function clearTextarea() {
+        document.getElementById("text").value = "";
+      }
+
       document.getElementById("text").focus();
     </script>
   </body>
 </html>
-
