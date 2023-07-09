@@ -182,7 +182,7 @@ In addition to the above variables, you can also modify values to the following 
 |`split_sentences`    |sets "whether the translation engine should first split the input into sentences"  |
 |`preserve_formatting`|sets "whether the translation engine should respect the original formatting"       |
 
-Currently the `formality` option only works when the target language is one of the following: `DE`, `FR`, `IT`, `ES`, `NL`, `PL`, `PT-PT`, `PT-BR` and `RU`.
+Currently the `formality` option only works when the target language is one of the following: `DE`, `FR`, `IT`, `ES`, `NL`, `PL`, `PT-PT`, `PT-BR`, `JA`, and `RU`.
 
 ### Utility Variables
 
