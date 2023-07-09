@@ -104,6 +104,10 @@ https://user-images.githubusercontent.com/18207/201455994-ea5cd80b-3438-48a0-8e1
 
 You can open a special input form in your default browser. To open this form, use the keyword `deepl-textbox` or a hotkey. When using this special input form, the `primary_lang` and `secondary lang` settings are ignored. You can specify the languages using selectors and change modes (translate or rewrite) using radio buttons. These settings are stored in the browser and can be used later.
 
+<kbd>
+    <img src='images/textarea.png' width="800" />
+</kbd>
+
 ### Monitor Usage
 
 You can check how much text characters you have translated so far in the current billing period as well as the limits you set on DeepL Setting Page. Type in the keyword `deepl-usage`.
