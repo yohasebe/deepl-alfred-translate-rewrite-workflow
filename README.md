@@ -22,12 +22,13 @@ There are other features including:
 
 ## Downloads
 
-**Current version**: `1.6.0`
+**Current version**: `1.6.1`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
+- 1.6.1: `formality` setting supported both in "translate" and "rewrite"
 - 1.6.0: `formality` environment variable supported (default: `default`)
 - 1.5.2: `speak` environment variable enabled (default: `false`)
 - 1.5.1: Improvement of internal process
@@ -178,11 +179,11 @@ In addition to the above variables, you can also modify values to the following 
 
 | Variable            | Explanation                                                                       |
 | ------------------- | ----------------------------------------------------------------------------------|
-|`formality`          |sets "whether the translated text should lean towards formal or informal language" |
-|`split_sentences`    |sets "whether the translation engine should first split the input into sentences"  |
-|`preserve_formatting`|sets "whether the translation engine should respect the original formatting"       |
+|`formality`          |sets whether the translated text should lean towards formal or informal language (`default`, `more`, `less`) |
+|`split_sentences`    |sets whether the translation engine should first split the input into sentences  |
+|`preserve_formatting`|sets whether the translation engine should respect the original formatting       |
 
-Currently the `formality` option only works when the target language is one of the following: `DE`, `FR`, `IT`, `ES`, `NL`, `PL`, `PT-PT`, `PT-BR`, `JA`, and `RU`.
+Currently the `formality` option only works when the target language (`secondary_lang` in "translation" mode; `primary_lang` in "rewrite" mode) is one of these: `DE`, `FR`, `IT`, `ES`, `NL`, `PL`, `PT-PT`, `PT-BR`, `JA`, and `RU`.
 
 ### Utility Variables
 
