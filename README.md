@@ -22,19 +22,19 @@ There are other features including:
 
 ## Downloads
 
-**Current version**: `1.6.1`
+**Current version**: `1.6.2`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
-- 1.6.1: `formality` setting supported both in "translate" and "rewrite"
+- 1.6.2: `formality` setting supported both in "translate" and "rewrite"
 - 1.6.0: `formality` environment variable supported (default: `default`)
 - 1.5.2: `speak` environment variable enabled (default: `false`)
 - 1.5.1: Improvement of internal process
 - 1.5.0: "deepl-textbox" command added
 - 1.4.0: "check-for-update" command added
-- 1.3.3: `open_file` environment valuable added 
+- 1.3.3: `open_file` environment valuable added
 - 1.3.2: Switched to Alfred's native feature to retrieve selected text for performance and stability
 - 1.3.1: Feature to translate/rewrite using Alfred's [universal action](https://www.alfredapp.com/universal-actions/)
 
@@ -89,7 +89,7 @@ Note: `max_characters` option is ignored for document translation.
 2. Select "DeepL Upload File" action.
 3. Specify if the translation is from `secondary_lang` to `primary_lang` (EN to JA, for instance) or the other way round (JA to EN, for instance).
 
-Or alternatively, you can use a workflow file action `DeepL Upload File`. 
+Or alternatively, you can use a workflow file action `DeepL Upload File`.
 
 **To download the translated file**
 
