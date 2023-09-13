@@ -14,26 +14,29 @@
     <header id="title-block-header">
       <h1 class="title">DeepL Translate / Rewrite</h1>
     </header>
-    <h2>
-      <span style="display: inline-block; height: 2em;"><img src='https://yohasebe.github.io/deepl-alfred-translate-rewrite-workflow/icon.png' style='height:100%;'/></span> <span>DeepL Translate / Rewrite Alfred Workflow</span>
+
+    <h2 style="margin: 0px; padding-bottom: 15px;">
+      <span style="display: inline-block; height: 2em; vertical-align: middle;"><img src='https://yohasebe.github.io/deepl-alfred-translate-rewrite-workflow/icon.png' style='height:100%;'/></span> <span>DeepL Translate / Rewrite Alfred Workflow</span>
     </h2>
-    <p>This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;font-weight: bold;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow' style='text-decoration: none; font-weight: bold;' > latest version of the workflow (0.1.6)</a> is properly installed. </p>
 
-
-    <p>Input data are directly sent to Alfred workflow locally installed on your Mac. The data is not sent to any website other than DeepL. </p>
+    <p style="color:gray; font-size: normal;">This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the <b>latest version</b> (<a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow' style='text-decoration: none;'>📥 download</a>) of the workflow is installed.</p>
 
     <div style='margin-top:20px;'>
       <textarea id="text" name="text" rows="5" placeholder="Enter your text here" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
     </div>
+    <div style='text-align: end'>
+      <button style='padding: 3px;' onclick = "clearTextarea();" />Clear Text</button>
+    </div>
 
     <div style='margin-top:20px;'>
-      <label>Mode: </label>
+      <label style="font-weight: bold;">Mode &nbsp;</label>
       <label><input type="radio" name="mode" value="translate" onchange="setStorage('mode', this.value);" checked="checked" />Translate</label>
       <label><input type="radio" name="mode" value="rewrite" onchange="setStorage('mode', this.value);" />Rewrite</label>
     </div>
 
     <div style='margin-top:20px;'>
-      <label for="source_lang" id="label_source_lang">Source Language: </label>
+      <label for="source_lang" id="label_source_lang" style="font-weight: bold;">Source Language </label>
+     &nbsp;
       <select id="source_lang" name="source_lang" onchange="setStorage('source_lang', this.value);">
         <option value="BG">Bulgarian</option>
         <option value="CS">Czech</option>
@@ -66,12 +69,12 @@
     </div>
 
     <div style='margin-top:10px;'>
-      <input type = "button" style="padding: 5px;" value="Switch ↑↓" onclick = "switchLanguages();" />
+      <button style="padding: 5px;" onclick = "switchLanguages();">↑↓ Switch Languages</button>
     </div>
 
-
     <div style='margin-top:10px;'>
-      <label for="target_lang" id="label_target_lang">Target Language: </label>
+      <label for="target_lang" id="label_target_lang" style="font-weight: bold;">Target Language </label>
+     &nbsp;
       <select id="target_lang" name="target_lang" onchange="setStorage('target_lang', this.value);" >
         <option value="BG">Bulgarian</option>
         <option value="CS">Czech</option>
@@ -101,12 +104,12 @@
         <option value="UK">Ukrainian</option>
         <option value="ZH">Chinese</option>
       </select>
-    </div>
 
-    <div style='margin-top:10px;'>
-      <label for="formality" id="label_formality">Formality (if available): </label>
+    </div>
+    <div style='margin-top:20px;'>
+      <label for="formality" id="label_formality"><b>Formality</b> (if available) &nbsp;</label>
       <select id="formality" name="formality" >
-        <option value="deafult">Default</option>
+        <option value="default">Default</option>
         <option value="more">More formal</option>
         <option value="less">Less formal</option>
       </select>
@@ -118,8 +121,7 @@
     </div>
 
     <div style='margin-top:20px;'>
-      <input type = "button" style='padding: 5px; margin-right: 10px;' value="Clear Textarea" onclick = "clearTextarea();" />
-      <input type = "button" style='padding: 5px; font-weight: bold;' value="Send Text → Alfred" onclick = "execute();" />
+      <button onclick = 'execute();' id='execute_button' style='padding: 5px;' ><span style="color: #3273f6;">▶</span> Send Text to Alfred</button>
     </div>
 
     <script>

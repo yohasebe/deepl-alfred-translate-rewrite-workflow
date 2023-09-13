@@ -42,6 +42,8 @@ Temporary Items
 /test/version_tmp/
 /tmp/
 
+tags
+
 # Used by dotenv library to load environment variables.
 # .env
 
