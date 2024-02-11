@@ -22,10 +22,14 @@
     <p style="color:gray; font-size: normal;">This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the <b>latest version</b> (<a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow' style='text-decoration: none;'>📥 download</a>) of the workflow is installed.</p>
 
     <div style='margin-top:20px;'>
+      <textarea id="context" name="context" rows="1" placeholder="Enter context here (optional)" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+    </div>
+
+    <div style='margin-top:20px;'>
       <textarea id="text" name="text" rows="5" placeholder="Enter your text here" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
     </div>
     <div style='text-align: end'>
-      <button style='padding: 3px;' onclick = "clearTextarea();" />Clear Text</button>
+      <button style='padding: 3px;' onclick = "clearTextarea();" />Clear context and text</button>
     </div>
 
     <div style='margin-top:20px;'>
@@ -177,17 +181,23 @@
         const formality = document.getElementById("formality").value;
         const mode = document.querySelector('[name="mode"]:checked').value
         const text = document.getElementById("text").value;
+        let context = document.getElementById("context").value;
+        // prepend "[CONTEXT] " to the text if context is not empty
+        if(context !== ""){
+          context = "[CONTEXT]" + context;
+        }
 
         if(text === ""){
           alert("Textarea is empty");
         } else {
-          const url = "alfred://runtrigger/com.yohasebe.deepl-alfred-translate-rewrite-workflow/deepl-translate-rewrite/?argument=" + mode + "%20" + source_lang + "%20" + target_lang + "%20" + formality + "%20" + text;
+          const url = "alfred://runtrigger/com.yohasebe.deepl-alfred-translate-rewrite-workflow/deepl-translate-rewrite/?argument=" + mode + "%20" + source_lang + "%20" + target_lang + "%20" + formality + "%20" + text + "%20" + context;
           window.location = url;
         }
       }
 
       function clearTextarea() {
         document.getElementById("text").value = "";
+        document.getElementById("context").value = "";
       }
 
       document.getElementById("text").focus();

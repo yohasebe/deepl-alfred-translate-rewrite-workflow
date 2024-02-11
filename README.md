@@ -1,7 +1,6 @@
 # DeepL Translate/Rewrite Workflow for Alfred
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/screenshot.png?raw=true' width="500" />
-
+<img src='./images/screenshot.png?raw=true' width="600" />
 
 ## Overview
 
@@ -9,11 +8,11 @@ An [Alfred workflow](https://www.alfredapp.com/workflows/) to help you translate
 
 The selected text can be used in any Mac application via hot keys. The source and target languages are automatically detected from one of the two languages specified in the settings `primary_lang` and `secondary_lang`. This means that if you want to translate or rewrite a text, regardless of whether it is in the primary or secondary language, all you have to do is select the text and press a hotkey.
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/translate.png?raw=true' height="120"/>
+<img src='./images/mermaid/translate.png?raw=true' height="120"/>
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/rewrite.png?raw=true' height="120"/>
+<img src='./images/mermaid/rewrite.png?raw=true' height="120"/>
 
-![deepl-alfred-translate-rewrite-workflow-demo](https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif)
+<img src='https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif' width="800"/>
 
 There are other features including:
 
@@ -22,13 +21,14 @@ There are other features including:
 
 ## Downloads
 
-**Current version**: `1.6.3`
+**Current version**: `1.7.0`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
-- 1.6.3: Web interface updated to support `formality`
+- 1.7.0: `context` parameter (alpha feature) supported ([API documentation](https://developers.deepl.com/docs/best-practices/working-with-context))
+- 1.6.3: Textbox (Web UI) updated to support `formality`
 - 1.6.2: `formality` setting supported both in "translate" and "rewrite"
 - 1.6.0: `formality` environment variable supported (default: `default`)
 - 1.5.2: `speak` environment variable enabled (default: `false`)
@@ -43,15 +43,15 @@ There are other features including:
 
 To start using this workflow, be sure to set the environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. See [Setting-up](#setting-up) section below.
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-01.png?raw=true' width="500" />
+<img src='./images/setup-01.png' width="600" />
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-02.png?raw=true' width="500" />
+<img src='./images/setup-02.png' width="600" />
 
 To translate or rewite text as a universal action, set up `selection hotkey` and enable `workflow file actions` and `workflow universal actions`.
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-03.png?raw=true' width="700" />
+<img src='./images/setup-03.png' width="800" />
 
-<img src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/setup-04.png?raw=true' width="700" />
+<img src='./images/setup-04.png' width="800" />
 
 ## Check for Update
 
@@ -107,7 +107,11 @@ https://user-images.githubusercontent.com/18207/201455994-ea5cd80b-3438-48a0-8e1
 You can open a special input form in your default browser. To open this form, use the keyword `deepl-textbox` or a hotkey. When using this special input form, the `primary_lang` and `secondary lang` settings are ignored. You can specify the languages using selectors and change modes (translate or rewrite) using radio buttons. These settings are stored in the browser and can be used later.
 
 <kbd>
-    <img src='images/textarea.png' width="800" />
+    <img src='images/textarea-translate.png' width="600" />
+</kbd>
+
+<kbd>
+    <img src='images/textarea-rewrite.png' width="600" />
 </kbd>
 
 ### Monitor Usage
@@ -190,14 +194,15 @@ Currently the `formality` option only works when the target language (`secondary
 
 There are a couple of additional parameters you can set to make the workflow more useful for you.
 
-| Variable               | Explanation                                                                       |
-| ---------------------- | ----------------------------------------------------------------------------------|
-|`use_largetype`         |uses Alfred's large type functionality                                             |
-|`max_characters`        |sets maximum number of characters accepted at a time                               |
-|`ja_text_width`         |sets width of translated text when `secondary_lang` is set to `JA` (Japanese)      |
-|`sound`                 |rings a chime when finished                                                        |
-|`speak`                 |read aloud the response in the "system speech language" on your Mac                |
-|`open_file`             |open the translation file once download is complete                                |
+| Variable               | Explanation                                                                  |
+| ---------------------- | -----------------------------------------------------------------------------|
+|`use_largetype`         |uses Alfred's large type functionality                                        |
+|`max_characters`        |sets maximum number of characters accepted at a time                          |
+|`ja_text_width`         |sets width of translated text when `secondary_lang` is set to `JA` (Japanese) |
+|`sound`                 |rings a chime when finished                                                   |
+|`speak`                 |read aloud the response in the "system speech language" on your Mac           |
+|`open_file`             |open the translation file once download is complete                           |
+|`context_input`         |allows the user to enter context during execution from Alfred interface       |
 
 With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
 
@@ -205,7 +210,7 @@ With `use_largetype` disabled, the workflow creates/updates a text file in the h
 
 If the `speak` variable is set `true`, the result text will be read aloud in the system's standard language and voice. To change the language and speech, go to `[Accessibility]` - `[Vision]` -`[Spoken Content]` in the Mac Settings panel.
 
-<img width="600" alt="spoken-content-panel" src="https://user-images.githubusercontent.com/18207/221521819-a942e6ba-0523-4526-93da-52b6167defaf.png">
+<img width="500" alt="spoken-content-panel" src="https://user-images.githubusercontent.com/18207/221521819-a942e6ba-0523-4526-93da-52b6167defaf.png">
 
 ## Author
 
