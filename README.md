@@ -21,12 +21,13 @@ There are other features including:
 
 ## Downloads
 
-**Current version**: `1.7.0`
+**Current version**: `1.8.0`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
+- 1.8.0: Fix API authentication for latest DeepL API; fix Large Type display issue on Alfred 5.7+; improve error handling; `context_input` default changed to off
 - 1.7.0: `context` parameter (alpha feature) supported ([API documentation](https://developers.deepl.com/docs/best-practices/working-with-context))
 - 1.6.3: Textbox (Web UI) updated to support `formality`
 - 1.6.2: `formality` setting supported both in "translate" and "rewrite"
@@ -202,7 +203,7 @@ There are a couple of additional parameters you can set to make the workflow mor
 |`sound`                 |rings a chime when finished                                                   |
 |`speak`                 |read aloud the response in the "system speech language" on your Mac           |
 |`open_file`             |open the translation file once download is complete                           |
-|`context_input`         |allows the user to enter context during execution from Alfred interface       |
+|`context_input`         |allows the user to enter context during execution from Alfred interface (default: off; set to `true` to enable) |
 
 With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
 
