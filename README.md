@@ -4,9 +4,9 @@
 
 ## Overview
 
-An [Alfred workflow](https://www.alfredapp.com/workflows/) to help you translate and rewrite text using the [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/) or the [Deepl free API](https://www.deepl.com/en/pro-api?cta=header-pro-api/).
+An [Alfred workflow](https://www.alfredapp.com/workflows/) to translate and rewrite text using the [DeepL API](https://www.deepl.com/en/pro-api?cta=header-pro-api/), free or Pro.
 
-The selected text can be used in any Mac application via hot keys. The source and target languages are automatically detected from one of the two languages specified in the settings `primary_lang` and `secondary_lang`. This means that if you want to translate or rewrite a text, regardless of whether it is in the primary or secondary language, all you have to do is select the text and press a hotkey.
+Select text in any Mac application and press a hotkey. The workflow works out which of your two languages (`primary_lang` and `secondary_lang`) the text is in and translates it into the other, so one hotkey covers both directions.
 
 **Translate**
 
@@ -35,19 +35,21 @@ Round trip shows the intermediate text alongside the result, and costs two trans
 
 <img src='https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif' width="800"/>
 
-There are other features including:
+Other features:
 
-- Translate/Rewrite using a special HTML input form
+- Translating text on screen by capturing an area with the mouse
+- An input form in your browser for translating and rewriting
 - Document translation (file uploading and downloading)
 
 ## Downloads
 
-**Current version**: `2.0.0`
+**Current version**: `2.1.0`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
+- 2.1.0: Translate text on screen: capture an area with the mouse, read it with the text recognition built into macOS, and translate it (keyword `deepl-capture` or a hotkey)
 - 2.0.0: The browser input form now ships inside the workflow instead of on GitHub Pages, shows the result of each request in place, offers both rewrite engines, and sizes its fields to their content; DeepL Write support (`rewrite_engine`, `writing_style`, `tone`, `write_target_lang`); `custom_instructions` and `model_type`; all settings moved to Alfred's Configure Workflow panel; formality support read from the DeepL API instead of a built-in list; 125 target languages; per-product usage reporting; more document formats and `enable_watermark`; document bookkeeping moved out of the workflow folder; HTTP timeouts. Fixed: the form's Context field was never sent; multi-line text from the form kept the formality marker as part of the text; the download list was sorted oldest-first
 - 1.8.0: Fix API authentication for latest DeepL API; fix Large Type display issue on Alfred 5.7+; improve error handling; `context_input` default changed to off
 - 1.7.0: `context` parameter (alpha feature) supported ([API documentation](https://developers.deepl.com/docs/best-practices/working-with-context))
@@ -62,9 +64,9 @@ There are other features including:
 - 1.3.2: Switched to Alfred's native feature to retrieve selected text for performance and stability
 - 1.3.1: Feature to translate/rewrite using Alfred's [universal action](https://www.alfredapp.com/universal-actions/)
 
-## Setup
+## Quick Start
 
-To start using this workflow, open **Configure Workflow** in Alfred and fill in your **DeepL API key**, **Primary language** and **Secondary language**. See [Setting-up](#setting-up) below.
+Open **Configure Workflow** in Alfred and fill in your **DeepL API key**, **Primary language** and **Secondary language**. See [Setting Up](#setting-up) below.
 
 To translate or rewrite text as a universal action, set up `selection hotkey` and enable `workflow file actions` and `workflow universal actions`.
 
@@ -86,7 +88,23 @@ Translate text in `secondary_lang` to `primary_lang` and vice versa. You can use
 * Fallback search
 * Keyword `deepl` (hold `^` to show the original text above the result)
 * System clipboard and keyword `deepl-clipboard`
-* User-defined hotkey (→ text currently selected in front-most app is sent)
+* User-defined hotkey (sends the text selected in the front-most app)
+
+### Translate text on screen
+
+Text you cannot select, such as text in an image, a video, a scanned PDF, or a remote desktop, can be captured from the screen instead:
+
+1. Type the keyword `deepl-capture`, or press one of the two "captured screen area" hotkeys in the workflow.
+2. The pointer turns into a crosshair. Drag over the area you want to translate, or press the space bar to pick a whole window. `Esc` cancels.
+3. The text in the area is read with the text recognition built into macOS, lines that wrap inside a paragraph are joined back together, and the result is translated like any other text.
+
+To see the original text above the translation, hold `^` on the keyword or use the second hotkey.
+
+Only the recognised text is sent to DeepL; the screenshot is deleted once it has been read. Holding `^` is also the macOS shortcut for sending a screen capture to the clipboard, so with that modifier the image stays there.
+
+The first time you use this, macOS asks you to let Alfred record the screen. Allow it under System Settings › Privacy & Security › Screen & System Audio Recording. Nothing is recorded; this is the permission a screen capture needs.
+
+Text recognition covers the languages macOS itself can read, including English, Japanese, Chinese, Korean, German, French, Spanish, and Portuguese. Choosing the language automatically needs macOS 13 or later.
 
 ### Rewrite text
 
@@ -97,14 +115,14 @@ Rewrite text in the language it is already written in. Two engines are available
 | `round_trip` (default) | Translates the text to the other language and back again. Shows the intermediate translation alongside the result. Two translation requests, both billed. |
 | `write_api` | Hands the text to [DeepL Write](https://developers.deepl.com/docs/api-reference/improve-text), which rephrases it in place. One request, billed separately from translation. Accepts `writing_style` and `tone`. |
 
-`write_api` supports German, English, Spanish, French, Italian, Japanese, Korean, Portuguese, and Chinese. `writing_style` and `tone` apply to a smaller set still: German, English (British and American), Spanish, French, Italian, and Portuguese. Japanese is rephrased but takes neither, and in practice the change it makes to Japanese is slight — `round_trip` often rewrites Japanese more visibly.
+`write_api` supports German, English, Spanish, French, Italian, Japanese, Korean, Portuguese, and Chinese. `writing_style` and `tone` apply to a smaller set: German, English (British and American), Spanish, French, Italian, and Portuguese. Japanese is rephrased but takes neither, and the change is usually slight; `round_trip` rewrites Japanese more visibly.
 
 You can use one of the following methods:
 
 * Universal action
 * Keyword `deepl` with `⌘` key pressed
 * System clipboard and keyword `deepl-clipboard` with `⌘` key pressed
-* User-defined hotkey (→ text currently selected in front-most app will be submitted)
+* User-defined hotkey (sends the text selected in the front-most app)
 
 ### Document translation
 
@@ -122,23 +140,23 @@ Note: `max_characters` option is ignored for document translation.
 2. Select "DeepL Upload File" action.
 3. Specify if the translation is from `secondary_lang` to `primary_lang` (EN to JA, for instance) or the other way round (JA to EN, for instance).
 
-Or alternatively, you can use a workflow file action `DeepL Upload File`.
+Alternatively, use the `DeepL Upload File` workflow file action.
 
 **To download the translated file**
 
 1. Select "DeepL Download File" script filter by typing `deepl-download`.
 2. Specify the title of the file from the list.
-3. Download will begin if the translation is complete. Otherwise, the current status (queued, translating, or error) will be displayed .
+3. Download will begin if the translation is complete. Otherwise, the current status (queued, translating, or error) will be displayed.
 
 See also [DeepL API: Translating documents](https://developers.deepl.com/docs/api-reference/document).
 
 https://user-images.githubusercontent.com/18207/201455994-ea5cd80b-3438-48a0-8e11-c25150ff5288.mp4
 
-### Special Input Form in Default Browser
+### Input Form in Your Browser
 
-You can open a special input form in your default browser. To open this form, use the keyword `deepl-textbox` or a hotkey.
+The keyword `deepl-textbox`, or a hotkey, opens an input form in your default browser.
 
-The form is part of the workflow rather than a hosted page: opening it writes a copy into the workflow's cache folder and opens that file, so it needs no network connection and nothing outside your Mac. Your current settings are baked into the page as it is written, which is also why the languages you configured appear in the selectors even when they are not among the ones listed there.
+The form is part of the workflow rather than a hosted page: opening it writes a copy into the workflow's cache folder and opens that file, so it needs no network connection. Your settings are written into the page, which is why the languages you configured appear in the selectors even when they are not among the ones listed.
 
 Languages and mode are chosen on the form itself, so `primary_lang` and `secondary_lang` do not constrain it. Your choices are remembered in the browser for next time. Mode offers all three routes:
 
@@ -151,8 +169,6 @@ Languages and mode are chosen on the form itself, so `primary_lang` and `seconda
 The first time you submit, your browser will ask whether to open Alfred. Allow it and the form works from then on.
 
 When Alfred has finished, switch back to the browser: the result appears below the button, with the mode and time it came from, while your original text stays in place. That makes it easy to adjust the text and send it again. The fields grow with what is in them, and a **Copy** button puts the result on the clipboard.
-
-Each screenshot shows the form after a request has come back: the result sits below the button while the original text stays editable.
 
 **Translate**
 
@@ -180,11 +196,11 @@ Type the keyword `deepl-usage` to see how many characters you have used in the c
 
 ## Requirements
 
-To use this Alfred workflow, you need a **DeepL API free** or **DeepL API Pro** account. Create one at the following URL.
+You need a **DeepL API Free** or **DeepL API Pro** account. Create one at:
 
 https://www.deepl.com/pro/change-plan#developer
 
-**Note:** The DeepL API is only available to DeepL developer API accounts (free or professional). It is not available (at the time of this writing) for regular personal DeepL accounts.
+**Note:** The DeepL API is available to developer API accounts only. A regular personal DeepL account will not work.
 
 ## Setting Up
 
@@ -351,7 +367,7 @@ Use the regional code (`EN-US`, `PT-BR`, ...) when you want a specific variant a
 
 This workflow translates/rewrites text written in either of the two languages set in the variables `primary_lang` and `secondary_lang`.
 
-If you are a native user of Japanese who often work with text in English, for instance, Set `primary_lang` to `JA` and `secondary_lang` to `EN`.
+If you are a Japanese speaker who often works with English text, set `primary_lang` to `JA` and `secondary_lang` to `EN`.
 
 ## Options
 
@@ -362,7 +378,6 @@ The rest of **Configure Workflow** is optional. The variable names below are wha
 | Variable            | Explanation                                                                       |
 | ------------------- | ----------------------------------------------------------------------------------|
 |`formality`            |sets whether the translated text should lean towards formal or informal language (`default`, `more`, `less`, `prefer_more`, `prefer_less`) |
-|`split_sentences`      |sets whether the translation engine should first split the input into sentences  |
 |`preserve_formatting`  |sets whether the translation engine should respect the original formatting       |
 |`model_type`           |picks the translation model (`quality_optimized`, `prefer_quality_optimized`, `latency_optimized`); leave empty to let DeepL choose |
 |`custom_instructions`  |free-form instructions that steer the translation, one per line (up to 10 lines of 300 characters) |
@@ -387,7 +402,7 @@ For example, "The attention mechanism improves the encoder-decoder model." is tr
 `アテンションメカニズムは、エンコーダー・デコーダーモデルを向上させます。` by default, and as
 `Attention Mechanismは、Encoder-Decoderモデルを向上させる。` with the two instructions above.
 
-Not every target language accepts custom instructions. The workflow checks with the DeepL API and simply omits them when the target language does not support them.
+Not every target language accepts custom instructions. The workflow asks the DeepL API and omits them when the target language does not support them.
 
 #### DeepL Write Styles and Tones
 
@@ -399,29 +414,29 @@ Not every target language accepts custom instructions. The workflow checks with 
 | `writing_style` = `academic` | The paper is intriguing, but the presentation is challenging to comprehend. |
 | `tone` = `diplomatic` | This paper is quite intriguing, though I must admit it was somewhat challenging to comprehend. |
 
-Both settings are sent to DeepL in their `prefer_` form. When `write_target_lang` is empty the language is detected rather than declared, so a detected language with no styles or tones falls back to a plain rewrite instead of failing — the setting is quietly ignored in that case.
+Both settings are sent in their `prefer_` form, so a language that has no styles or tones falls back to a plain rewrite instead of failing.
 
-Leaving `write_target_lang` empty lets DeepL pick the regional variant, which is what makes styles and tones available at all: the base codes (`EN`, `PT`) support neither. The trade-off is that DeepL may pick British spelling on one run and American on the next. Set `write_target_lang` to `EN-US` or `EN-GB` to pin it.
+Leaving `write_target_lang` empty lets DeepL pick the regional variant, which is what makes styles and tones available: the base codes (`EN`, `PT`) support neither. The trade-off is that DeepL may pick British spelling on one run and American on the next. Set `write_target_lang` to `EN-US` or `EN-GB` to pin it.
 
-When `write_target_lang` *is* set, the workflow checks it against the languages DeepL Write accepts and reports an error rather than sending text that would come back unchanged — so pinning `EN` while asking for `academic` tells you to use `EN-US` instead of silently dropping the style.
+When `write_target_lang` is set, the workflow checks it against the languages DeepL Write accepts. Pinning `EN` while asking for `academic` reports an error naming the variants that do work, rather than dropping the style without saying so.
 
 ### Output and Behaviour
 
 | Variable               | Explanation                                                                  |
 | ---------------------- | -----------------------------------------------------------------------------|
 |`use_largetype`         |shows the result in Alfred's Large Type                                       |
-|`max_characters`        |refuses input longer than this, as a guard against translating something huge by accident |
+|`max_characters`        |refuses input longer than this, as a guard against translating a huge amount of text by accident |
 |`ja_text_width`         |wraps Japanese results at this many characters per line                       |
 |`sound`                 |plays a chime when finished                                                   |
-|`speak`                 |reads the result aloud in the "system speech language" on your Mac            |
+|`speak`                 |reads the result aloud with your Mac's Spoken Content voice                   |
 |`open_file`             |opens the translated document once the download is complete                   |
 |`context_input`         |adds a step that lets you type context before translating                     |
 
-With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
+With `use_largetype` disabled, the workflow writes the result to `~/deepl-translate-rewrite-latest.txt` and opens that file in your default text editor.
 
 ### Advanced
 
-One setting is deliberately kept out of **Configure Workflow**, in the `[x]` environment variables panel instead, because it is a DeepL API detail that rarely needs changing:
+One setting is kept out of **Configure Workflow** and sits in the `[x]` environment variables panel instead, since it is a DeepL API detail that rarely needs changing:
 
 | Variable            | Explanation                                                                       |
 | ------------------- | ----------------------------------------------------------------------------------|
@@ -429,7 +444,7 @@ One setting is deliberately kept out of **Configure Workflow**, in the `[x]` env
 
 #### Text to Speech
 
-If the `speak` variable is set `true`, the result text will be read aloud in the system's standard language and voice. To change the language and speech, go to `[Accessibility]` - `[Vision]` -`[Spoken Content]` in the Mac Settings panel.
+With `speak` enabled, the result is read aloud in your Mac's default language and voice. To change either, go to System Settings › Accessibility › Spoken Content.
 
 <img width="500" alt="spoken-content-panel" src="https://user-images.githubusercontent.com/18207/221521819-a942e6ba-0523-4526-93da-52b6167defaf.png">
 
