@@ -8,9 +8,30 @@ An [Alfred workflow](https://www.alfredapp.com/workflows/) to help you translate
 
 The selected text can be used in any Mac application via hot keys. The source and target languages are automatically detected from one of the two languages specified in the settings `primary_lang` and `secondary_lang`. This means that if you want to translate or rewrite a text, regardless of whether it is in the primary or secondary language, all you have to do is select the text and press a hotkey.
 
-<img src='./images/mermaid/translate.png?raw=true' height="120"/>
+**Translate**
 
-<img src='./images/mermaid/rewrite.png?raw=true' height="120"/>
+```mermaid
+flowchart LR
+  IN["Selected text"] --> D{"Which of your<br/>two languages?"}
+  D -->|"primary (JA)"| T1["translate"] --> O1["Secondary language (EN)"]
+  D -->|"secondary (EN)"| T2["translate"] --> O2["Primary language (JA)"]
+```
+
+**Rewrite — DeepL Write** (`rewrite_engine` = `write_api`)
+
+```mermaid
+flowchart LR
+  IN["Selected text (JA)"] -- rephrase --> OUT["Improved text (JA)"]
+```
+
+**Rewrite — round trip** (`rewrite_engine` = `round_trip`, the default)
+
+```mermaid
+flowchart LR
+  IN["Selected text (JA)"] -- translate --> MID["Intermediate text (EN)"] -- translate back --> OUT["Rewritten text (JA)"]
+```
+
+Round trip shows the intermediate text alongside the result, and costs two translation requests instead of one.
 
 <img src='https://user-images.githubusercontent.com/18207/88474487-d6c16f80-cf61-11ea-87fd-2817c840f7d3.gif' width="800"/>
 
@@ -21,12 +42,13 @@ There are other features including:
 
 ## Downloads
 
-**Current version**: `1.8.0`
+**Current version**: `2.0.0`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
+- 2.0.0: The browser input form now ships inside the workflow instead of on GitHub Pages, shows the result of each request in place, offers both rewrite engines, and sizes its fields to their content; DeepL Write support (`rewrite_engine`, `writing_style`, `tone`, `write_target_lang`); `custom_instructions` and `model_type`; all settings moved to Alfred's Configure Workflow panel; formality support read from the DeepL API instead of a built-in list; 125 target languages; per-product usage reporting; more document formats and `enable_watermark`; document bookkeeping moved out of the workflow folder; HTTP timeouts. Fixed: the form's Context field was never sent; multi-line text from the form kept the formality marker as part of the text; the download list was sorted oldest-first
 - 1.8.0: Fix API authentication for latest DeepL API; fix Large Type display issue on Alfred 5.7+; improve error handling; `context_input` default changed to off
 - 1.7.0: `context` parameter (alpha feature) supported ([API documentation](https://developers.deepl.com/docs/best-practices/working-with-context))
 - 1.6.3: Textbox (Web UI) updated to support `formality`
@@ -42,11 +64,7 @@ There are other features including:
 
 ## Setup
 
-To start using this workflow, be sure to set the environment variables `auth_key`, `primary_lang`, and `secondary_lang` first. See [Setting-up](#setting-up) section below.
-
-<img src='./images/setup-01.png' width="600" />
-
-<img src='./images/setup-02.png' width="600" />
+To start using this workflow, open **Configure Workflow** in Alfred and fill in your **DeepL API key**, **Primary language** and **Secondary language**. See [Setting-up](#setting-up) below.
 
 To translate or rewite text as a universal action, set up `selection hotkey` and enable `workflow file actions` and `workflow universal actions`.
 
@@ -72,7 +90,16 @@ Translate text in `secondary_lang` to `primary_lang` and vice versa. You can use
 
 ### Rewrite text
 
-Rewrite text in one language by translating it to the other language and translating the resulting text back to the original language again. You can use one of the following methods:
+Rewrite text in the language it is already written in. Two engines are available, selected with the `rewrite_engine` variable:
+
+| `rewrite_engine` | How it works |
+| ---------------- | ------------ |
+| `round_trip` (default) | Translates the text to the other language and back again. Shows the intermediate translation alongside the result. Two translation requests, both billed. |
+| `write_api` | Hands the text to [DeepL Write](https://developers.deepl.com/docs/api-reference/improve-text), which rephrases it in place. One request, billed separately from translation. Accepts `writing_style` and `tone`. |
+
+`write_api` supports German, English, Spanish, French, Italian, Japanese, Korean, Portuguese, and Chinese. `writing_style` and `tone` apply to a smaller set still: German, English (British and American), Spanish, French, Italian, and Portuguese. Japanese is rephrased but takes neither, and in practice the change it makes to Japanese is slight — `round_trip` often rewrites Japanese more visibly.
+
+You can use one of the following methods:
 
 * Universal action
 * Keyword `deepl` with `⌘` key pressed
@@ -81,7 +108,11 @@ Rewrite text in one language by translating it to the other language and transla
 
 ### Document translation
 
-Translate documents of the type `.pptx`, `docx`, or `.pdf`. Upload the original file and then download the resulting file once the translation is complete. The translated file will be downloaded to the same folder as the original file.
+Upload the original file and then download the resulting file once the translation is complete. The translated file will be downloaded to the same folder as the original file.
+
+Supported formats: `.docx`, `.pptx`, `.xlsx`, `.pdf`, `.htm`/`.html`, `.txt`, `.srt`, `.xlf`/`.xliff` (1.2, 2.0 and 2.1), `.idml`, `.xml`, `.json`, `.dita`, and `.mif`. On API Pro, `.docx`, `.pptx` and `.pdf` may be up to 100 MB.
+
+Setting `enable_watermark` to `true` stamps a "Translated by DeepL" watermark on the result. DeepL only applies it to `.docx` and `.pdf` output, so the workflow leaves it off for every other format.
 
 Note: `max_characters` option is ignored for document translation.
 
@@ -105,14 +136,42 @@ https://user-images.githubusercontent.com/18207/201455994-ea5cd80b-3438-48a0-8e1
 
 ### Special Input Form in Default Browser
 
-You can open a special input form in your default browser. To open this form, use the keyword `deepl-textbox` or a hotkey. When using this special input form, the `primary_lang` and `secondary lang` settings are ignored. You can specify the languages using selectors and change modes (translate or rewrite) using radio buttons. These settings are stored in the browser and can be used later.
+You can open a special input form in your default browser. To open this form, use the keyword `deepl-textbox` or a hotkey.
+
+The form is part of the workflow rather than a hosted page: opening it writes a copy into the workflow's cache folder and opens that file, so it needs no network connection and nothing outside your Mac. Your current settings are baked into the page as it is written, which is also why the languages you configured appear in the selectors even when they are not among the ones listed there.
+
+Languages and mode are chosen on the form itself, so `primary_lang` and `secondary_lang` do not constrain it. Your choices are remembered in the browser for next time. Mode offers all three routes:
+
+| Mode | What it does |
+| ---- | ------------ |
+| Translate | Source language to target language |
+| Rewrite &middot; round trip | Translates through the intermediate language and back |
+| Rewrite &middot; DeepL Write | Rephrases in place; the language and formality selectors disappear because DeepL Write takes neither |
+
+The first time you submit, your browser will ask whether to open Alfred. Allow it and the form works from then on.
+
+When Alfred has finished, switch back to the browser: the result appears below the button, with the mode and time it came from, while your original text stays in place. That makes it easy to adjust the text and send it again. The fields grow with what is in them, and a **Copy** button puts the result on the clipboard.
+
+Each screenshot shows the form after a request has come back: the result sits below the button while the original text stays editable.
+
+**Translate**
 
 <kbd>
     <img src='images/textarea-translate.png' width="600" />
 </kbd>
 
+**Rewrite — round trip**
+
 <kbd>
-    <img src='images/textarea-rewrite.png' width="600" />
+    <img src='images/textarea-rewrite-roundtrip.png' width="600" />
+</kbd>
+
+**Rewrite — DeepL Write**
+
+DeepL Write works out the language on its own and takes no formality setting, so the form drops the selectors that would have no effect.
+
+<kbd>
+    <img src='images/textarea-rewrite-write.png' width="600" />
 </kbd>
 
 ### Monitor Usage
@@ -129,47 +188,164 @@ https://www.deepl.com/pro/change-plan#developer
 
 ## Setting Up
 
-Before you start using this Alfred workflow, you must set values to the following variables (use `[x]` button in Alfred's Workflow Setting Panel):
+Everything is configured from Alfred's **Configure Workflow** panel. Three settings are required before the workflow will run:
 
-**Mandatory Variables**
-
-| Variable       | Explanation                                                          |
-| -------------- | -------------------------------------------------------------------- |
-|`authkey`       | authentication key for DeepL API                                     |
-|`primary_lang`  | sets the primary language (usually your native language)             |
-|`secondary_lang`| sets the secondary language (usually the language you use DeepL for) |
+| Setting | Explanation |
+| ------- | ----------- |
+| DeepL API key | Authentication key for the DeepL API |
+| Primary language | The language you usually write in (typically your native language) |
+| Secondary language | The other language you work in |
 
 **Available Languages**
 
-| Code     | Language   |
-| -------- | ---------- |
-| `BG`     | Bulgarian  |
-| `CS`     | Czech      |
-| `DA`     | Danish     |
-| `DE`     | German     |
-| `EL`     | Greek      |
-| `EN`     | English    |
-| `ES`     | Spanish    |
-| `ET`     | Estonian   |
-| `FI`     | Finnish    |
-| `FR`     | French     |
-| `HU`     | Hungarian  |
-| `ID`     | Indonesian |
-| `IT`     | Italian    |
-| `JA`     | Japanese   |
-| `LT`     | Lithuanian |
-| `LV`     | Latvian    |
-| `NL`     | Dutch      |
-| `PL`     | Polish     |
-| `PT`     | Portuguese |
-| `RO`     | Romanian   |
-| `RU`     | Russian    |
-| `SK`     | Slovak     |
-| `SL`     | Slovenian  |
-| `SV`     | Swedish    |
-| `TR`     | Turkish    |
-| `ZH`     | Chinese    |
+DeepL supports 125 target languages, 114 of which can also be detected automatically as the source language. Commonly used codes are:
 
+| Code | Language | Code | Language | Code | Language |
+| ---- | -------- | ---- | -------- | ---- | -------- |
+| `AR` | Arabic     | `HE` | Hebrew     | `PT-BR` | Portuguese (Brazilian) |
+| `DA` | Danish     | `ID` | Indonesian | `PT-PT` | Portuguese (European)  |
+| `DE` | German     | `IT` | Italian    | `RU` | Russian     |
+| `EN` | English    | `JA` | Japanese   | `SV` | Swedish     |
+| `EN-GB` | English (British)  | `KO` | Korean  | `TH` | Thai        |
+| `EN-US` | English (American) | `NL` | Dutch   | `TR` | Turkish     |
+| `ES` | Spanish    | `NB` | Norwegian Bokmal | `VI` | Vietnamese |
+| `FR` | French     | `PL` | Polish     | `ZH-HANS` | Chinese (simplified)  |
+| `FR-CA` | French (Canadian) | `PT` | Portuguese | `ZH-HANT` | Chinese (traditional) |
+
+Use the regional code (`EN-US`, `PT-BR`, ...) when you want a specific variant as the **target**; the plain code (`EN`, `PT`, ...) is what DeepL reports when detecting a **source** language, so that is usually the better choice for `primary_lang` and `secondary_lang`.
+
+<details>
+<summary><b>Full list of supported languages</b></summary>
+
+| Code | Language | Source | Target | `formality` |
+| ---- | -------- | :----: | :----: | :---------: |
+| `ACE` | Acehnese | ✓ | ✓ |  |
+| `AF` | Afrikaans | ✓ | ✓ |  |
+| `AN` | Aragonese | ✓ | ✓ |  |
+| `AR` | Arabic | ✓ | ✓ |  |
+| `AS` | Assamese | ✓ | ✓ |  |
+| `AY` | Aymara | ✓ | ✓ |  |
+| `AZ` | Azerbaijani | ✓ | ✓ |  |
+| `BA` | Bashkir | ✓ | ✓ |  |
+| `BE` | Belarusian | ✓ | ✓ |  |
+| `BG` | Bulgarian | ✓ | ✓ |  |
+| `BHO` | Bhojpuri | ✓ | ✓ |  |
+| `BN` | Bengali | ✓ | ✓ |  |
+| `BR` | Breton | ✓ | ✓ |  |
+| `BS` | Bosnian | ✓ | ✓ |  |
+| `CA` | Catalan | ✓ | ✓ |  |
+| `CEB` | Cebuano | ✓ | ✓ |  |
+| `CKB` | Kurdish (Sorani) | ✓ | ✓ |  |
+| `CS` | Czech | ✓ | ✓ |  |
+| `CY` | Welsh | ✓ | ✓ |  |
+| `DA` | Danish | ✓ | ✓ |  |
+| `DE` | German | ✓ | ✓ | ✓ |
+| `DE-CH` | German (Swiss) |  | ✓ | ✓ |
+| `DE-DE` | German |  | ✓ | ✓ |
+| `EL` | Greek | ✓ | ✓ |  |
+| `EN` | English | ✓ | ✓ |  |
+| `EN-GB` | English (British) |  | ✓ |  |
+| `EN-US` | English (American) |  | ✓ |  |
+| `EO` | Esperanto | ✓ | ✓ |  |
+| `ES` | Spanish | ✓ | ✓ | ✓ |
+| `ES-419` | Spanish (Latin American) |  | ✓ | ✓ |
+| `ET` | Estonian | ✓ | ✓ |  |
+| `EU` | Basque | ✓ | ✓ |  |
+| `FA` | Persian | ✓ | ✓ |  |
+| `FI` | Finnish | ✓ | ✓ |  |
+| `FR` | French | ✓ | ✓ | ✓ |
+| `FR-CA` | French (Canadian) |  | ✓ | ✓ |
+| `FR-FR` | French |  | ✓ | ✓ |
+| `GA` | Irish | ✓ | ✓ |  |
+| `GL` | Galician | ✓ | ✓ |  |
+| `GN` | Guarani | ✓ | ✓ |  |
+| `GOM` | Konkani | ✓ | ✓ |  |
+| `GU` | Gujarati | ✓ | ✓ |  |
+| `HA` | Hausa | ✓ | ✓ |  |
+| `HE` | Hebrew | ✓ | ✓ |  |
+| `HI` | Hindi | ✓ | ✓ |  |
+| `HR` | Croatian | ✓ | ✓ |  |
+| `HT` | Haitian Creole | ✓ | ✓ |  |
+| `HU` | Hungarian | ✓ | ✓ |  |
+| `HY` | Armenian | ✓ | ✓ |  |
+| `ID` | Indonesian | ✓ | ✓ |  |
+| `IG` | Igbo | ✓ | ✓ |  |
+| `IS` | Icelandic | ✓ | ✓ |  |
+| `IT` | Italian | ✓ | ✓ | ✓ |
+| `JA` | Japanese | ✓ | ✓ | ✓ |
+| `JV` | Javanese | ✓ | ✓ |  |
+| `KA` | Georgian | ✓ | ✓ |  |
+| `KK` | Kazakh | ✓ | ✓ |  |
+| `KMR` | Kurdish (Kurmanji) | ✓ | ✓ |  |
+| `KO` | Korean | ✓ | ✓ |  |
+| `KY` | Kyrgyz | ✓ | ✓ |  |
+| `LA` | Latin | ✓ | ✓ |  |
+| `LB` | Luxembourgish | ✓ | ✓ |  |
+| `LMO` | Lombard | ✓ | ✓ |  |
+| `LN` | Lingala | ✓ | ✓ |  |
+| `LT` | Lithuanian | ✓ | ✓ |  |
+| `LV` | Latvian | ✓ | ✓ |  |
+| `MAI` | Maithili | ✓ | ✓ |  |
+| `MG` | Malagasy | ✓ | ✓ |  |
+| `MI` | Maori | ✓ | ✓ |  |
+| `MK` | Macedonian | ✓ | ✓ |  |
+| `ML` | Malayalam | ✓ | ✓ |  |
+| `MN` | Mongolian | ✓ | ✓ |  |
+| `MR` | Marathi | ✓ | ✓ |  |
+| `MS` | Malay | ✓ | ✓ |  |
+| `MT` | Maltese | ✓ | ✓ |  |
+| `MY` | Burmese | ✓ | ✓ |  |
+| `NB` | Norwegian (bokmål) | ✓ | ✓ |  |
+| `NE` | Nepali | ✓ | ✓ |  |
+| `NL` | Dutch | ✓ | ✓ | ✓ |
+| `OC` | Occitan | ✓ | ✓ |  |
+| `OM` | Oromo | ✓ | ✓ |  |
+| `PA` | Punjabi | ✓ | ✓ |  |
+| `PAG` | Pangasinan | ✓ | ✓ |  |
+| `PAM` | Kapampangan | ✓ | ✓ |  |
+| `PL` | Polish | ✓ | ✓ | ✓ |
+| `PRS` | Dari | ✓ | ✓ |  |
+| `PS` | Pashto | ✓ | ✓ |  |
+| `PT` | Portuguese | ✓ | ✓ | ✓ |
+| `PT-BR` | Portuguese (Brazilian) |  | ✓ | ✓ |
+| `PT-PT` | Portuguese (European) |  | ✓ | ✓ |
+| `QU` | Quechua | ✓ | ✓ |  |
+| `RO` | Romanian | ✓ | ✓ |  |
+| `RU` | Russian | ✓ | ✓ | ✓ |
+| `SA` | Sanskrit | ✓ | ✓ |  |
+| `SCN` | Sicilian | ✓ | ✓ |  |
+| `SK` | Slovak | ✓ | ✓ |  |
+| `SL` | Slovenian | ✓ | ✓ |  |
+| `SQ` | Albanian | ✓ | ✓ |  |
+| `SR` | Serbian | ✓ | ✓ |  |
+| `ST` | Sesotho | ✓ | ✓ |  |
+| `SU` | Sundanese | ✓ | ✓ |  |
+| `SV` | Swedish | ✓ | ✓ |  |
+| `SW` | Swahili | ✓ | ✓ |  |
+| `TA` | Tamil | ✓ | ✓ |  |
+| `TE` | Telugu | ✓ | ✓ |  |
+| `TG` | Tajik | ✓ | ✓ |  |
+| `TH` | Thai | ✓ | ✓ |  |
+| `TK` | Turkmen | ✓ | ✓ |  |
+| `TL` | Tagalog | ✓ | ✓ |  |
+| `TN` | Tswana | ✓ | ✓ |  |
+| `TR` | Turkish | ✓ | ✓ |  |
+| `TS` | Tsonga | ✓ | ✓ |  |
+| `TT` | Tatar | ✓ | ✓ |  |
+| `UK` | Ukrainian | ✓ | ✓ |  |
+| `UR` | Urdu | ✓ | ✓ |  |
+| `UZ` | Uzbek | ✓ | ✓ |  |
+| `VI` | Vietnamese | ✓ | ✓ |  |
+| `WO` | Wolof | ✓ | ✓ |  |
+| `XH` | Xhosa | ✓ | ✓ |  |
+| `YI` | Yiddish | ✓ | ✓ |  |
+| `YUE` | Cantonese | ✓ | ✓ |  |
+| `ZH` | Chinese | ✓ | ✓ |  |
+| `ZH-HANS` | Chinese (simplified) |  | ✓ |  |
+| `ZH-HANT` | Chinese (traditional) |  | ✓ |  |
+| `ZU` | Zulu | ✓ | ✓ |  |
+
+</details>
 
 **What are primary and secondary languages?**
 
@@ -179,33 +355,77 @@ If you are a native user of Japanese who often work with text in English, for in
 
 ## Options
 
-In addition to the above variables, you can also modify values to the following DeepL API parameters. See [DeepL API](https://www.deepl.com/docs-api) for details.
+The rest of **Configure Workflow** is optional. The variable names below are what the settings are called internally, in case you want to set them from a script or an external trigger. See [DeepL API](https://www.deepl.com/docs-api) for the underlying parameters.
 
-### Optional DeepL Variables
+### Translation and Rewriting
 
 | Variable            | Explanation                                                                       |
 | ------------------- | ----------------------------------------------------------------------------------|
-|`formality`          |sets whether the translated text should lean towards formal or informal language (`default`, `more`, `less`) |
-|`split_sentences`    |sets whether the translation engine should first split the input into sentences  |
-|`preserve_formatting`|sets whether the translation engine should respect the original formatting       |
+|`formality`            |sets whether the translated text should lean towards formal or informal language (`default`, `more`, `less`, `prefer_more`, `prefer_less`) |
+|`split_sentences`      |sets whether the translation engine should first split the input into sentences  |
+|`preserve_formatting`  |sets whether the translation engine should respect the original formatting       |
+|`model_type`           |picks the translation model (`quality_optimized`, `prefer_quality_optimized`, `latency_optimized`); leave empty to let DeepL choose |
+|`custom_instructions`  |free-form instructions that steer the translation, one per line (up to 10 lines of 300 characters) |
+|`rewrite_engine`       |how "rewrite" mode works: `round_trip` (default) or `write_api` |
+|`writing_style`        |DeepL Write style when `rewrite_engine` is `write_api`: `academic`, `business`, `casual`, `simple` |
+|`tone`                 |DeepL Write tone when `rewrite_engine` is `write_api`: `confident`, `diplomatic`, `enthusiastic`, `friendly` |
+|`write_target_lang`    |pins the language variant DeepL Write rewrites into, e.g. `EN-US`; leave empty to let DeepL choose |
+|`enable_watermark`     |stamps a "Translated by DeepL" watermark on translated `.docx` and `.pdf` documents |
 
-Currently the `formality` option only works when the target language (`secondary_lang` in "translation" mode; `primary_lang` in "rewrite" mode) is one of these: `DE`, `FR`, `IT`, `ES`, `NL`, `PL`, `PT-PT`, `PT-BR`, `JA`, and `RU`.
+The `formality` option only applies when the target language (`secondary_lang` in "translation" mode; `primary_lang` in "rewrite" mode) supports it. The workflow asks the DeepL API which languages those are and caches the answer for a week, so newly supported languages start working without an update. See the `formality` column in the language table above.
 
-### Utility Variables
+#### Custom Instructions
 
-There are a couple of additional parameters you can set to make the workflow more useful for you.
+`custom_instructions` lets you tell DeepL how to translate, in plain language. Write one instruction per line:
+
+```
+Keep technical terms in English (do not transliterate into katakana).
+Use plain, non-polite form.
+```
+
+For example, "The attention mechanism improves the encoder-decoder model." is translated into Japanese as
+`アテンションメカニズムは、エンコーダー・デコーダーモデルを向上させます。` by default, and as
+`Attention Mechanismは、Encoder-Decoderモデルを向上させる。` with the two instructions above.
+
+Not every target language accepts custom instructions. The workflow checks with the DeepL API and simply omits them when the target language does not support them.
+
+#### DeepL Write Styles and Tones
+
+`writing_style` and `tone` are mutually exclusive — set one or the other, not both. The same English sentence, rewritten by `write_api`:
+
+| Setting | Result |
+| ------- | ------ |
+| (none) | I think this paper is really interesting, but it's quite difficult to follow. |
+| `writing_style` = `academic` | The paper is intriguing, but the presentation is challenging to comprehend. |
+| `tone` = `diplomatic` | This paper is quite intriguing, though I must admit it was somewhat challenging to comprehend. |
+
+Both settings are sent to DeepL in their `prefer_` form. When `write_target_lang` is empty the language is detected rather than declared, so a detected language with no styles or tones falls back to a plain rewrite instead of failing — the setting is quietly ignored in that case.
+
+Leaving `write_target_lang` empty lets DeepL pick the regional variant, which is what makes styles and tones available at all: the base codes (`EN`, `PT`) support neither. The trade-off is that DeepL may pick British spelling on one run and American on the next. Set `write_target_lang` to `EN-US` or `EN-GB` to pin it.
+
+When `write_target_lang` *is* set, the workflow checks it against the languages DeepL Write accepts and reports an error rather than sending text that would come back unchanged — so pinning `EN` while asking for `academic` tells you to use `EN-US` instead of silently dropping the style.
+
+### Output and Behaviour
 
 | Variable               | Explanation                                                                  |
 | ---------------------- | -----------------------------------------------------------------------------|
-|`use_largetype`         |uses Alfred's large type functionality                                        |
-|`max_characters`        |sets maximum number of characters accepted at a time                          |
-|`ja_text_width`         |sets width of translated text when `secondary_lang` is set to `JA` (Japanese) |
-|`sound`                 |rings a chime when finished                                                   |
-|`speak`                 |read aloud the response in the "system speech language" on your Mac           |
-|`open_file`             |open the translation file once download is complete                           |
-|`context_input`         |allows the user to enter context during execution from Alfred interface (default: off; set to `true` to enable) |
+|`use_largetype`         |shows the result in Alfred's Large Type                                       |
+|`max_characters`        |refuses input longer than this, as a guard against translating something huge by accident |
+|`ja_text_width`         |wraps Japanese results at this many characters per line                       |
+|`sound`                 |plays a chime when finished                                                   |
+|`speak`                 |reads the result aloud in the "system speech language" on your Mac            |
+|`open_file`             |opens the translated document once the download is complete                   |
+|`context_input`         |adds a step that lets you type context before translating                     |
 
 With `use_largetype` disabled, the workflow creates/updates a text file in the home directory (`~/deepl-translate-rewrite-latest.txt`) and opens it in the default text editing app.
+
+### Advanced
+
+One setting is deliberately kept out of **Configure Workflow**, in the `[x]` environment variables panel instead, because it is a DeepL API detail that rarely needs changing:
+
+| Variable            | Explanation                                                                       |
+| ------------------- | ----------------------------------------------------------------------------------|
+|`split_sentences`    |how DeepL splits the input into sentences: `0` (no splitting), `1` (punctuation and newlines) or `nonewlines` (punctuation only) |
 
 #### Text to Speech
 

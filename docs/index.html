@@ -1,206 +1,63 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-    <title>DeepL Translate / Rewrite</title>
-    <link rel="stylesheet" href="https://yohasebe.github.io/deepl-alfred-translate-rewrite-workflow/github.css" />
-    <!--[if lt IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-    <![endif]-->
-    <link rel='icon' href='https://yohasebe.github.io/deepl-alfred-translate-rewrite-workflow/icon.png' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepL Translate / Rewrite — this form has moved</title>
+    <style>
+      :root {
+        --bg: #f6f7f9; --surface: #fff; --text: #1c2024;
+        --muted: #626d79; --border: #d7dce2; --accent: #1c5fd8;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #15181c; --surface: #1d2126; --text: #e6e9ed;
+          --muted: #9aa4b0; --border: #333a42; --accent: #6ea1ff;
+        }
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0; padding: 48px 20px; background: var(--bg); color: var(--text);
+        font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 620px; margin: 0 auto; }
+      .card {
+        background: var(--surface); border: 1px solid var(--border);
+        border-radius: 14px; padding: 30px 28px;
+      }
+      h1 { margin: 0 0 14px; font-size: 21px; letter-spacing: -0.01em; }
+      p { margin: 0 0 16px; }
+      p.last { margin-bottom: 0; }
+      .muted { color: var(--muted); font-size: 14px; }
+      a { color: var(--accent); }
+      .cta {
+        display: inline-block; margin: 8px 0 20px; padding: 11px 22px;
+        background: var(--accent); color: #fff; font-weight: 600;
+        border-radius: 10px; text-decoration: none;
+      }
+      .cta:hover { filter: brightness(1.08); }
+      code { background: var(--bg); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; font-size: 90%; }
+    </style>
   </head>
   <body>
-    <header id="title-block-header">
-      <h1 class="title">DeepL Translate / Rewrite</h1>
-    </header>
+    <div class="wrap">
+      <div class="card">
+        <h1>This input form has moved into the workflow</h1>
 
-    <h2 style="margin: 0px; padding-bottom: 15px;">
-      <span style="display: inline-block; height: 2em; vertical-align: middle;"><img src='https://yohasebe.github.io/deepl-alfred-translate-rewrite-workflow/icon.png' style='height:100%;'/></span> <span>DeepL Translate / Rewrite Alfred Workflow</span>
-    </h2>
+        <p>From version 2.0.0, <code>deepl-textbox</code> opens a form that ships inside the
+        Alfred workflow itself. It needs no network connection and no hosted page, which is
+        why this one is no longer the real thing.</p>
 
-    <p style="color:gray; font-size: normal;">This page is part of <a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow' style='text-decoration: none;'>Alfred workflow for DeepL translation and rewrite</a>. The submit button will only work if the <b>latest version</b> (<a href='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow' style='text-decoration: none;'>📥 download</a>) of the workflow is installed.</p>
+        <p>You are seeing this page because the workflow you have installed is older than 2.0.0.
+        Updating brings the form back, along with DeepL Write, custom instructions, and the
+        settings panel.</p>
 
-    <div style='margin-top:20px;'>
-      <textarea id="context" name="context" rows="1" placeholder="Enter context here (optional)" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+        <a class="cta" href="https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow">Download the latest version</a>
+
+        <p class="muted last">Release notes and setup instructions:
+        <a href="https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow">github.com/yohasebe/deepl-alfred-translate-rewrite-workflow</a></p>
+      </div>
     </div>
-
-    <div style='margin-top:20px;'>
-      <textarea id="text" name="text" rows="5" placeholder="Enter your text here" style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
-    </div>
-    <div style='text-align: end'>
-      <button style='padding: 3px;' onclick = "clearTextarea();" />Clear context and text</button>
-    </div>
-
-    <div style='margin-top:20px;'>
-      <label style="font-weight: bold;">Mode &nbsp;</label>
-      <label><input type="radio" name="mode" value="translate" onchange="setStorage('mode', this.value);" checked="checked" />Translate</label>
-      <label><input type="radio" name="mode" value="rewrite" onchange="setStorage('mode', this.value);" />Rewrite</label>
-    </div>
-
-    <div style='margin-top:20px;'>
-      <label for="source_lang" id="label_source_lang" style="font-weight: bold;">Source Language </label>
-     &nbsp;
-      <select id="source_lang" name="source_lang" onchange="setStorage('source_lang', this.value);">
-        <option value="BG">Bulgarian</option>
-        <option value="CS">Czech</option>
-        <option value="DA">Danish</option>
-        <option value="DE">German</option>
-        <option value="EL">Greek</option>
-        <option value="EN">English</option>
-        <option value="ES">Spanish</option>
-        <option value="ET">Estonian</option>
-        <option value="FI">Finnish</option>
-        <option value="FR">French</option>
-        <option value="HU">Hungarian</option>
-        <option value="ID">Indonesian</option>
-        <option value="IT">Italian</option>
-        <option value="JA">Japanese</option>
-        <option value="LT">Lithuanian</option>
-        <option value="LV">Latvian</option>
-        <option value="NL">Dutch</option>
-        <option value="PL">Polish</option>
-        <option value="PT">Portuguese</option>
-        <option value="RO">Romanian</option>
-        <option value="RU">Russian</option>
-        <option value="SK">Slovak</option>
-        <option value="SL">Slovenian</option>
-        <option value="SV">Swedish</option>
-        <option value="TR">Turkish</option>
-        <option value="UK">Ukrainian</option>
-        <option value="ZH">Chinese</option>
-      </select>
-    </div>
-
-    <div style='margin-top:10px;'>
-      <button style="padding: 5px;" onclick = "switchLanguages();">↑↓ Switch Languages</button>
-    </div>
-
-    <div style='margin-top:10px;'>
-      <label for="target_lang" id="label_target_lang" style="font-weight: bold;">Target Language </label>
-     &nbsp;
-      <select id="target_lang" name="target_lang" onchange="setStorage('target_lang', this.value);" >
-        <option value="BG">Bulgarian</option>
-        <option value="CS">Czech</option>
-        <option value="DA">Danish</option>
-        <option value="DE">German</option>
-        <option value="EL">Greek</option>
-        <option value="EN">English</option>
-        <option value="ES">Spanish</option>
-        <option value="ET">Estonian</option>
-        <option value="FI">Finnish</option>
-        <option value="FR">French</option>
-        <option value="HU">Hungarian</option>
-        <option value="ID">Indonesian</option>
-        <option value="IT">Italian</option>
-        <option value="JA">Japanese</option>
-        <option value="LT">Lithuanian</option>
-        <option value="LV">Latvian</option>
-        <option value="NL">Dutch</option>
-        <option value="PL">Polish</option>
-        <option value="PT">Portuguese</option>
-        <option value="RO">Romanian</option>
-        <option value="RU">Russian</option>
-        <option value="SK">Slovak</option>
-        <option value="SL">Slovenian</option>
-        <option value="SV">Swedish</option>
-        <option value="TR">Turkish</option>
-        <option value="UK">Ukrainian</option>
-        <option value="ZH">Chinese</option>
-      </select>
-
-    </div>
-    <div style='margin-top:20px;'>
-      <label for="formality" id="label_formality"><b>Formality</b> (if available) &nbsp;</label>
-      <select id="formality" name="formality" >
-        <option value="default">Default</option>
-        <option value="more">More formal</option>
-        <option value="less">Less formal</option>
-      </select>
-    </div>
-
-    <div style='margin-top:20px;'>
-      <img id='img-translate' src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/translate.png?raw=true' style='display:none; height: 140px;'/>
-      <img id='img-rewrite' src='https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/blob/main/images/mermaid/rewrite.png?raw=true' style='display:none; height: 140px;'/>
-    </div>
-
-    <div style='margin-top:20px;'>
-      <button onclick = 'execute();' id='execute_button' style='padding: 5px;' ><span style="color: #3273f6;">▶</span> Send Text to Alfred</button>
-    </div>
-
-    <script>
-
-      function switchLabels(value){
-        if(value == "translate"){
-          document.getElementById("label_source_lang").innerText = "Source Language";
-          document.getElementById("label_target_lang").innerText = "Target Language";
-          document.getElementById("img-rewrite").style.display = "none";
-          const img = document.getElementById("img-translate")
-          img.style.display = "block";
-        } else if (value == "rewrite"){
-          document.getElementById("label_source_lang").innerText = "Source/Target Language";
-          document.getElementById("label_target_lang").innerText = "Intermediate Language";
-          document.getElementById("img-translate").style.display = "none";
-          const img = document.getElementById("img-rewrite")
-          img.style.display = "block";
-        }
-      }
-
-      function setStorage(key, value) {
-        localStorage.setItem(key, value);
-        if(key === "mode"){
-          switchLabels(value);
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", function(){
-        document.getElementById("source_lang").value = localStorage.getItem("source_lang") || "EN";
-        document.getElementById("target_lang").value = localStorage.getItem("target_lang") || "EN";
-        const radios = document.getElementsByName("mode");
-        const value = localStorage.getItem('mode') || "rewrite";
-        switchLabels(value)
-        for(let i = 0; i < radios.length; i++){
-          if(radios[i].value == value){
-            radios[i].checked = true;
-          }
-        }
-      });
-
-      function switchLanguages() {
-        const sl = document.getElementById("source_lang").value;
-        const tl = document.getElementById("target_lang").value
-        document.getElementById("source_lang").value = tl;
-        document.getElementById("target_lang").value = sl;
-        setStorage("source_lang", tl);
-        setStorage("target_lang", sl);
-      }
-        
-      function execute() {
-        const source_lang = document.getElementById("source_lang").value;
-        const target_lang = document.getElementById("target_lang").value;
-        const formality = document.getElementById("formality").value;
-        const mode = document.querySelector('[name="mode"]:checked').value
-        const text = document.getElementById("text").value;
-        let context = document.getElementById("context").value;
-        // prepend "[CONTEXT] " to the text if context is not empty
-        if(context !== ""){
-          context = "[CONTEXT]" + context;
-        }
-
-        if(text === ""){
-          alert("Textarea is empty");
-        } else {
-          const url = "alfred://runtrigger/com.yohasebe.deepl-alfred-translate-rewrite-workflow/deepl-translate-rewrite/?argument=" + mode + "%20" + source_lang + "%20" + target_lang + "%20" + formality + "%20" + text + "%20" + context;
-          window.location = url;
-        }
-      }
-
-      function clearTextarea() {
-        document.getElementById("text").value = "";
-        document.getElementById("context").value = "";
-      }
-
-      document.getElementById("text").focus();
-    </script>
   </body>
 </html>
