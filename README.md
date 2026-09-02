@@ -66,7 +66,7 @@ There are other features including:
 
 To start using this workflow, open **Configure Workflow** in Alfred and fill in your **DeepL API key**, **Primary language** and **Secondary language**. See [Setting-up](#setting-up) below.
 
-To translate or rewite text as a universal action, set up `selection hotkey` and enable `workflow file actions` and `workflow universal actions`.
+To translate or rewrite text as a universal action, set up `selection hotkey` and enable `workflow file actions` and `workflow universal actions`.
 
 <img src='./images/setup-03.png' width="800" />
 
@@ -84,8 +84,8 @@ Translate text in `secondary_lang` to `primary_lang` and vice versa. You can use
 
 * Universal action
 * Fallback search
-* Keyword `deepl`
-* System clipboard and keyword `deepl-clip`
+* Keyword `deepl` (hold `^` to show the original text above the result)
+* System clipboard and keyword `deepl-clipboard`
 * User-defined hotkey (→ text currently selected in front-most app is sent)
 
 ### Rewrite text
@@ -103,7 +103,7 @@ You can use one of the following methods:
 
 * Universal action
 * Keyword `deepl` with `⌘` key pressed
-* System clipboard and keyword `deepl-clip` with `⌘` key pressed
+* System clipboard and keyword `deepl-clipboard` with `⌘` key pressed
 * User-defined hotkey (→ text currently selected in front-most app will be submitted)
 
 ### Document translation
@@ -130,7 +130,7 @@ Or alternatively, you can use a workflow file action `DeepL Upload File`.
 2. Specify the title of the file from the list.
 3. Download will begin if the translation is complete. Otherwise, the current status (queued, translating, or error) will be displayed .
 
-See also [DeepL API: Translating documents](https://www.deepl.com/docs-api/translating-documents/).
+See also [DeepL API: Translating documents](https://developers.deepl.com/docs/api-reference/document).
 
 https://user-images.githubusercontent.com/18207/201455994-ea5cd80b-3438-48a0-8e11-c25150ff5288.mp4
 
@@ -146,7 +146,7 @@ Languages and mode are chosen on the form itself, so `primary_lang` and `seconda
 | ---- | ------------ |
 | Translate | Source language to target language |
 | Rewrite &middot; round trip | Translates through the intermediate language and back |
-| Rewrite &middot; DeepL Write | Rephrases in place; the language and formality selectors disappear because DeepL Write takes neither |
+| Rewrite &middot; DeepL Write | Rephrases in place. The language and formality selectors give way to an **Output variant** selector, since DeepL Write detects the language itself and only needs to know which regional variant to write in |
 
 The first time you submit, your browser will ask whether to open Alfred. Allow it and the form works from then on.
 
@@ -168,7 +168,7 @@ Each screenshot shows the form after a request has come back: the result sits be
 
 **Rewrite — DeepL Write**
 
-DeepL Write works out the language on its own and takes no formality setting, so the form drops the selectors that would have no effect.
+DeepL Write works out the language on its own and takes no formality setting, so those selectors give way to an **Output variant** choice: leave it on Auto, or pin a variant such as `EN-US` when the spelling matters.
 
 <kbd>
     <img src='images/textarea-rewrite-write.png' width="600" />
@@ -176,7 +176,7 @@ DeepL Write works out the language on its own and takes no formality setting, so
 
 ### Monitor Usage
 
-You can check how much text characters you have translated so far in the current billing period as well as the limits you set on DeepL Setting Page. Type in the keyword `deepl-usage`.
+Type the keyword `deepl-usage` to see how many characters you have used in the current billing period against your limit, with a breakdown by product (translation and DeepL Write are billed separately).
 
 ## Requirements
 
@@ -355,7 +355,7 @@ If you are a native user of Japanese who often work with text in English, for in
 
 ## Options
 
-The rest of **Configure Workflow** is optional. The variable names below are what the settings are called internally, in case you want to set them from a script or an external trigger. See [DeepL API](https://www.deepl.com/docs-api) for the underlying parameters.
+The rest of **Configure Workflow** is optional. The variable names below are what the settings are called internally, in case you want to set them from a script or an external trigger. See the [DeepL API reference](https://developers.deepl.com/docs/api-reference/translate) for the underlying parameters.
 
 ### Translation and Rewriting
 
@@ -372,7 +372,7 @@ The rest of **Configure Workflow** is optional. The variable names below are wha
 |`write_target_lang`    |pins the language variant DeepL Write rewrites into, e.g. `EN-US`; leave empty to let DeepL choose |
 |`enable_watermark`     |stamps a "Translated by DeepL" watermark on translated `.docx` and `.pdf` documents |
 
-The `formality` option only applies when the target language (`secondary_lang` in "translation" mode; `primary_lang` in "rewrite" mode) supports it. The workflow asks the DeepL API which languages those are and caches the answer for a week, so newly supported languages start working without an update. See the `formality` column in the language table above.
+The `formality` option only applies when the target language supports it: in translation mode that is the language being translated into, and in round-trip rewrite mode it is the language the text is written in. DeepL Write does not take a formality setting at all. The workflow asks the DeepL API which languages those are and caches the answer for a week, so newly supported languages start working without an update. See the `formality` column in the language table above.
 
 #### Custom Instructions
 
