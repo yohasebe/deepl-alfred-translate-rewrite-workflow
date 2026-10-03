@@ -59,7 +59,7 @@ BUNDLE = File.join(REPO, "deepl-alfred-translate-rewrite.alfredworkflow")
 RUBY_FILES = %w[
   alfred-deepl.rb alfred-deepl-usage.rb alfred-deepl-upload.rb
   alfred-deepl-download.rb alfred-deepl-check-uploaded.rb alfred-deepl-webui.rb
-  deepl-api.rb config.rb
+  deepl-api.rb deepl-key.rb config.rb
 ].freeze
 
 # Screen-capture OCR calls the macOS text recognition through JXA.

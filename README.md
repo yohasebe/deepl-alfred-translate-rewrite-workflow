@@ -43,12 +43,13 @@ Other features:
 
 ## Downloads
 
-**Current version**: `2.1.0`
+**Current version**: `2.2.0`
 
 [Download workflow](https://github.com/yohasebe/deepl-alfred-translate-rewrite-workflow/raw/main/deepl-alfred-translate-rewrite.alfredworkflow)
 
 **Change Log**
 
+- 2.2.0: The API key setting accepts a 1Password reference (`op://…`) or a keychain item (`keychain:<name>`) instead of the key itself, so the key need not sit in Alfred's preferences; document bookkeeping no longer falls back to the workflow folder when a script is run outside Alfred
 - 2.1.0: Translate text on screen: capture an area with the mouse, read it with the text recognition built into macOS, and translate it (keyword `deepl-capture` or a hotkey)
 - 2.0.0: The browser input form now ships inside the workflow instead of on GitHub Pages, shows the result of each request in place, offers both rewrite engines, and sizes its fields to their content; DeepL Write support (`rewrite_engine`, `writing_style`, `tone`, `write_target_lang`); `custom_instructions` and `model_type`; all settings moved to Alfred's Configure Workflow panel; formality support read from the DeepL API instead of a built-in list; 125 target languages; per-product usage reporting; more document formats and `enable_watermark`; document bookkeeping moved out of the workflow folder; HTTP timeouts. Fixed: the form's Context field was never sent; multi-line text from the form kept the formality marker as part of the text; the download list was sorted oldest-first
 - 1.8.0: Fix API authentication for latest DeepL API; fix Large Type display issue on Alfred 5.7+; improve error handling; `context_input` default changed to off
@@ -208,9 +209,29 @@ Everything is configured from Alfred's **Configure Workflow** panel. Three setti
 
 | Setting | Explanation |
 | ------- | ----------- |
-| DeepL API key | Authentication key for the DeepL API |
+| DeepL API key | Authentication key for the DeepL API, or where to read it from (see below) |
 | Primary language | The language you usually write in (typically your native language) |
 | Secondary language | The other language you work in |
+
+**Keeping the API key out of Alfred's preferences**
+
+Alfred saves what you enter in **Configure Workflow** as plain text in the workflow's `prefs.plist`, and if you sync Alfred's preferences, the key is synced with them. Instead of the key itself, the **DeepL API key** field accepts a reference to where the key is stored:
+
+| Enter | The key is read from |
+| ----- | -------------------- |
+| The key itself | The field, as before |
+| `op://Vault/Item/field` | 1Password, with the 1Password CLI (`op read`) |
+| `keychain:<item name>` | The macOS keychain (`security find-generic-password -s <item name> -w`) |
+
+For 1Password, install the [1Password CLI](https://developer.1password.com/docs/cli/) and turn on its integration with the 1Password app. In 1Password, choose **Copy Secret Reference** on the field that holds the key and paste the result into the workflow's setting. The CLI is looked for on Alfred's `PATH` and in `/opt/homebrew/bin` and `/usr/local/bin`. 1Password may ask you to approve the first request.
+
+For the keychain, add the key once in Terminal (it prompts for the key, so the key does not end up in your shell history), then enter `keychain:deepl-api-key` in the setting:
+
+```
+security add-generic-password -s deepl-api-key -a deepl -w
+```
+
+The key read through a reference is kept in memory only while the workflow runs. It is not written to a file or to an Alfred variable. If it cannot be read, the workflow says why (1Password CLI not found, not signed in, item not found) without showing the reference, and nothing is sent to DeepL.
 
 **Available Languages**
 

@@ -1,0 +1,34 @@
+# Paths this repository may track. check_tracked_paths.rb fails when a tracked
+# file matches no line here, and when a line here matches no tracked file (so
+# a stale line cannot quietly widen what is allowed).
+#
+# Lines are File.fnmatch globs with FNM_PATHNAME | FNM_DOTMATCH: `*` stays
+# within one directory and also matches dotfiles, `**/` spans any depth.
+# `{a,b}` is expanded by the checker before matching, and every alternative
+# must match a tracked file.
+#
+# Adding a line is a decision about what may be published: this repository is
+# public, and the workflow bundle users download is one of its files.
+
+# --- Repository root --------------------------------------------------------
+.gitattributes
+.gitignore
+LICENSE
+README.md
+version.txt
+deepl-alfred-translate-rewrite.alfredworkflow
+
+# --- Repository tooling -----------------------------------------------------
+.github/workflows/*.yml
+scripts/pack_workflow.rb
+scripts/lint/check_tracked_paths.rb
+scripts/lint/tracked_paths.allow
+test/test_*.rb
+test/workflow_dir.rb
+
+# --- The page versions before 2.0 open (GitHub Pages) -----------------------
+docs/.nojekyll
+docs/index.html
+
+# --- Images README.md shows -------------------------------------------------
+images/*.png
