@@ -93,3 +93,6 @@ Gemfile.lock
 # .rubocop-https?--*
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,ruby
+
+# Local path to the installed workflow, for scripts/pack_workflow.rb
+.envrc

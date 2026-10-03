@@ -29,12 +29,28 @@
 require "fileutils"
 require "tmpdir"
 
-# The installed workflow folder. It is outside this repository and its name is
-# an Alfred-assigned UUID, so it is read from the environment and the default is
-# only a convenience for the machine this was written on.
-WF = ENV["ALFRED_WORKFLOW_DIR"] ||
-  File.expand_path("~/Library/CloudStorage/Dropbox/alfred/Alfred.alfredpreferences/" \
-                   "workflows/user.workflow.B310AA94-5F8B-4903-9899-991939976462")
+# The installed workflow folder lives outside this repository: where Alfred
+# keeps its preferences is a local choice, and the folder name is a UUID Alfred
+# assigned on the machine the workflow was installed on. Neither belongs in a
+# published file, so there is no default here. Set ALFRED_WORKFLOW_DIR in a
+# shell profile or an ignored .envrc.
+workflow_dir = ENV["ALFRED_WORKFLOW_DIR"].to_s
+if workflow_dir.empty?
+  warn <<~USAGE
+    usage: ALFRED_WORKFLOW_DIR=<folder> ruby scripts/pack_workflow.rb [--write]
+
+    ALFRED_WORKFLOW_DIR is the folder Alfred installed this workflow into. It
+    sits under Alfred.alfredpreferences/workflows and is named user.workflow.
+    followed by a UUID; the right one holds an info.plist whose bundleid is
+    com.yohasebe.deepl-alfred-translate-rewrite-workflow.
+  USAGE
+  exit 1
+end
+
+# expand_path also drops a trailing slash, which the paths below assume.
+WF = File.expand_path(workflow_dir)
+abort "ALFRED_WORKFLOW_DIR is not a directory: #{WF}" unless File.directory?(WF)
+
 REPO = File.expand_path("..", __dir__)
 BUNDLE = File.join(REPO, "deepl-alfred-translate-rewrite.alfredworkflow")
 
