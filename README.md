@@ -223,7 +223,13 @@ Alfred saves what you enter in **Configure Workflow** as plain text in the workf
 | `op://Vault/Item/field` | 1Password, with the 1Password CLI (`op read`) |
 | `keychain:<item name>` | The macOS keychain (`security find-generic-password -s <item name> -w`) |
 
-For 1Password, install the [1Password CLI](https://developer.1password.com/docs/cli/) and turn on its integration with the 1Password app. In 1Password, choose **Copy Secret Reference** on the field that holds the key and paste the result into the workflow's setting. The CLI is looked for on Alfred's `PATH` and in `/opt/homebrew/bin` and `/usr/local/bin`. 1Password may ask you to approve the first request.
+For 1Password, the workflow reads the key with the 1Password CLI (`op`), which is installed separately from the 1Password app: the app alone is not enough, and the CLI has to be set up on each Mac you run the workflow on. On each Mac:
+
+1. Install the CLI: `brew install --cask 1password-cli` (or see [1Password CLI](https://developer.1password.com/docs/cli/get-started/) for other ways).
+2. In the 1Password app, open **Settings › Developer** and turn on **Integrate with 1Password CLI**. Without it, the workflow reports that the CLI is not signed in.
+3. Check it from Terminal without printing the key: `op read "op://Vault/Item/field" >/dev/null && echo OK`
+
+In 1Password, choose **Copy Secret Reference** on the field that holds the key and paste the result into the workflow's setting. The CLI is looked for on Alfred's `PATH` and in `/opt/homebrew/bin` and `/usr/local/bin`. 1Password may ask you to approve the first request. If you sync Alfred's preferences between Macs, the reference travels with them, but the CLI does not.
 
 For the keychain, add the key once in Terminal (it prompts for the key, so the key does not end up in your shell history), then enter `keychain:deepl-api-key` in the setting:
 
